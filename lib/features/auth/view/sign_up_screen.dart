@@ -5,6 +5,10 @@ import 'package:flutter_bluesky_clone/features/auth/view/handle_name_entry_scree
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+final inviteControllerProvider = ChangeNotifierProvider<TextEditingController>(
+  (ref) => TextEditingController(),
+);
+
 class SignUpScreen extends ConsumerWidget {
   const SignUpScreen({super.key});
   static const routePath = 'SignUp';
@@ -153,7 +157,3 @@ class SignUpScreen extends ConsumerWidget {
     );
   }
 }
-
-final inviteControllerProvider = ChangeNotifierProvider<TextEditingController>(
-  (ref) => TextEditingController(),
-);

@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+final handleNameControllerProvider =
+    ChangeNotifierProvider<TextEditingController>(
+  (ref) => TextEditingController(),
+);
+
 class HandleNameEntryScreen extends ConsumerWidget {
   const HandleNameEntryScreen({super.key});
   static const routePath = 'HandleNameEntry';
@@ -70,8 +75,3 @@ class HandleNameEntryScreen extends ConsumerWidget {
     );
   }
 }
-
-final handleNameControllerProvider =
-    ChangeNotifierProvider<TextEditingController>(
-  (ref) => TextEditingController(),
-);
