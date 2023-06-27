@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -48,7 +49,9 @@ class SignInScreen extends StatelessWidget {
               ),
               Expanded(child: Container()),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.go(HomeScreen.routePath);
+                },
                 child: const Text('Next'),
               ),
             ],

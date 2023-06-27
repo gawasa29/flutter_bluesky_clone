@@ -4,10 +4,16 @@ import 'package:flutter_bluesky_clone/features/auth/view/hosting_sign_up_screen.
 import 'package:flutter_bluesky_clone/features/auth/view/sign_in_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/sign_up_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/welcome_screen.dart';
+import 'package:flutter_bluesky_clone/features/notification/view/notification_screen.dart';
+import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
+import 'package:flutter_bluesky_clone/features/search/view/search_screen.dart';
+import 'package:flutter_bluesky_clone/features/user/view/profile_screen.dart';
+import 'package:flutter_bluesky_clone/router/scaffold_with_bottom_nav_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 final rootNavigatorKey = Provider((ref) => GlobalKey<NavigatorState>());
+final shellNavigatorKey = Provider((ref) => GlobalKey<NavigatorState>());
 
 final routerProvider = Provider(
   (ref) {
@@ -46,6 +52,38 @@ final routerProvider = Provider(
             ),
           ],
         ),
+        ShellRoute(
+          navigatorKey: ref.watch(shellNavigatorKey),
+          builder: (context, state, child) => ScaffoldWithBottomNavBar(
+            child: child,
+          ),
+          routes: [
+            GoRoute(
+              path: HomeScreen.routePath,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: HomeScreen(),
+              ),
+            ),
+            GoRoute(
+              path: SearchScreen.routePath,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: SearchScreen(),
+              ),
+            ),
+            GoRoute(
+              path: NotificationScreen.routePath,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: NotificationScreen(),
+              ),
+            ),
+            GoRoute(
+              path: ProfileScreen.routePath,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: ProfileScreen(),
+              ),
+            ),
+          ],
+        )
       ],
     );
   },
