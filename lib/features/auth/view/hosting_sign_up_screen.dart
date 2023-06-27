@@ -14,7 +14,9 @@ class HostingSignUpScreen extends ConsumerWidget {
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
     final hostingSelectionProvider = ref.watch(hostingSelectionStateProvider);
-    final urlController = TextEditingController(text: 'https://');
+    final url = ref.watch(urlProvider);
+    final urlController = TextEditingController(text: url);
+    final showErrorContainer = ref.watch(showErrorContainerProvider);
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -91,7 +93,11 @@ class HostingSignUpScreen extends ConsumerWidget {
                                   children: [
                                     ElevatedButton(
                                       onPressed: () {
-                                        urlController.text =
+                                        ref
+                                            .read(showErrorContainerProvider
+                                                .notifier)
+                                            .state = false;
+                                        ref.read(urlProvider.notifier).state =
                                             'https://staging.bsky.dev';
                                       },
                                       child: const Text('Staging'),
@@ -99,7 +105,11 @@ class HostingSignUpScreen extends ConsumerWidget {
                                     const SizedBox(width: 5),
                                     ElevatedButton(
                                       onPressed: () {
-                                        urlController.text =
+                                        ref
+                                            .read(showErrorContainerProvider
+                                                .notifier)
+                                            .state = true;
+                                        ref.read(urlProvider.notifier).state =
                                             'http://localhost:2583';
                                       },
                                       child: const Text('Dev Server'),
@@ -113,28 +123,57 @@ class HostingSignUpScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: colors.secondary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Icon(Icons.report_gmailerrorred),
-                        ),
-                        Flexible(
-                          child: Padding(
+                  if (showErrorContainer)
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: colors.error,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        children: [
+                          const Padding(
                             padding: EdgeInsets.all(8),
-                            child: Text(
-                                'You can change hosting providers at any time.'),
+                            child: Icon(Icons.report_gmailerrorred),
                           ),
-                        ),
-                      ],
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Text(
+                                'Unable to contact your service. Please check your Internet connection.',
+                                style: typography.bodyMedium!.copyWith(
+                                  color: colors.background,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  else
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: colors.secondary,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Icon(Icons.report_gmailerrorred),
+                          ),
+                          Flexible(
+                            child: Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Text(
+                                'You can change hosting providers at any time.',
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                   Row(
                     children: [
                       TextButton(
@@ -166,3 +205,6 @@ enum HostingOption { bluesky, other }
 
 final hostingSelectionStateProvider =
     StateProvider((ref) => HostingOption.bluesky);
+
+final showErrorContainerProvider = StateProvider<bool>((ref) => false);
+final urlProvider = StateProvider<String>((ref) => 'https://');

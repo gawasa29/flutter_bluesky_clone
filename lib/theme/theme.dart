@@ -11,17 +11,21 @@ class BlueSkyTheme extends ThemeExtension<BlueSkyTheme> {
     this.primaryColor = const Color(0xFF0085FF),
     this.secondaryColor = const Color(0xFFF3F3F8),
     this.neutralColor = const Color(0xFF545664),
+    this.errorColor = const Color(0xffeb4898),
   });
 
   final Color primaryColor;
   final Color secondaryColor;
   final Color neutralColor;
+  final Color errorColor;
+
   ColorScheme _scheme() {
     return ColorScheme.fromSeed(
       seedColor: primaryColor,
       primary: primaryColor,
       secondary: secondaryColor,
       onSecondary: neutralColor,
+      error: errorColor,
     );
   }
 
@@ -50,11 +54,13 @@ class BlueSkyTheme extends ThemeExtension<BlueSkyTheme> {
     Color? primaryColor,
     Color? secondaryColor,
     Color? neutralColor,
+    Color? errorColor,
   }) =>
       BlueSkyTheme(
         primaryColor: primaryColor ?? this.primaryColor,
         secondaryColor: secondaryColor ?? this.secondaryColor,
         neutralColor: neutralColor ?? this.neutralColor,
+        errorColor: errorColor ?? this.errorColor,
       );
 
   @override
@@ -67,6 +73,7 @@ class BlueSkyTheme extends ThemeExtension<BlueSkyTheme> {
       primaryColor: Color.lerp(primaryColor, other.primaryColor, t)!,
       secondaryColor: Color.lerp(secondaryColor, other.secondaryColor, t)!,
       neutralColor: Color.lerp(neutralColor, other.neutralColor, t)!,
+      errorColor: Color.lerp(errorColor, other.errorColor, t)!,
     );
   }
 }
