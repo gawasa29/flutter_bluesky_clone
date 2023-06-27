@@ -2,23 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class HandleNameEntryScreen extends ConsumerStatefulWidget {
+class HandleNameEntryScreen extends ConsumerWidget {
   const HandleNameEntryScreen({super.key});
   static const routePath = 'HandleNameEntry';
   static const routeFullPath = '/Welcome/HostingSignUp/SignUp/HandleNameEntry';
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _HandleNameEntryScreenState();
-}
-
-class _HandleNameEntryScreenState extends ConsumerState<HandleNameEntryScreen> {
-  final handleNameController = TextEditingController();
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     print('📱 HandleNameEntryScreen !!! ');
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
+    final handleNameController = ref.watch(handleNameControllerProvider);
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -47,9 +41,6 @@ class _HandleNameEntryScreenState extends ConsumerState<HandleNameEntryScreen> {
                       prefixIcon: Icon(Icons.alternate_email),
                       hintText: 'e.g alice',
                     ),
-                    onChanged: (value) {
-                      setState(() {});
-                    },
                   ),
                   const SizedBox(height: 10),
                   Text(
@@ -79,3 +70,8 @@ class _HandleNameEntryScreenState extends ConsumerState<HandleNameEntryScreen> {
     );
   }
 }
+
+final handleNameControllerProvider =
+    ChangeNotifierProvider<TextEditingController>(
+  (ref) => TextEditingController(),
+);

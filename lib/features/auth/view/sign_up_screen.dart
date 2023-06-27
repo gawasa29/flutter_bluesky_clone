@@ -5,25 +5,19 @@ import 'package:flutter_bluesky_clone/features/auth/view/handle_name_entry_scree
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class SignUpScreen extends ConsumerStatefulWidget {
+class SignUpScreen extends ConsumerWidget {
   const SignUpScreen({super.key});
   static const routePath = 'SignUp';
   static const routeFullPath = '/Welcome/HostingSignUp/SignUp';
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpScreenState();
-}
-
-class _SignUpScreenState extends ConsumerState<SignUpScreen> {
-  final inviteController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     print('📱 SignUpScreen !!! ');
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
-
+    final inviteController = ref.watch(inviteControllerProvider);
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -53,9 +47,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       prefixIcon: Icon(Icons.confirmation_number),
                       hintText: 'Required for this provider',
                     ),
-                    onChanged: (value) {
-                      setState(() {});
-                    },
                   ),
                   const SizedBox(height: 10),
                   if (inviteController.text.isEmpty)
@@ -162,3 +153,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     );
   }
 }
+
+final inviteControllerProvider = ChangeNotifierProvider<TextEditingController>(
+  (ref) => TextEditingController(),
+);
