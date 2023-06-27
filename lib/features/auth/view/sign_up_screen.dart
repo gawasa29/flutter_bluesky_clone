@@ -15,7 +15,7 @@ class SignUpScreen extends ConsumerWidget {
   static const routeFullPath = '/Welcome/HostingSignUp/SignUp';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('📱 SignUpScreen !!! ');
+    print('📱 build SignUpScreen ');
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;

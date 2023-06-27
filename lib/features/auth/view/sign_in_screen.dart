@@ -7,7 +7,7 @@ class SignInScreen extends StatelessWidget {
   static const routeFullPath = '/Welcome/SignIn';
   @override
   Widget build(BuildContext context) {
-    print('📱 SignInScreen !!! ');
+    print('📱 build SignInScreen ');
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;

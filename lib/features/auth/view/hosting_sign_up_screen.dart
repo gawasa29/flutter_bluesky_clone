@@ -9,7 +9,7 @@ class HostingSignUpScreen extends ConsumerWidget {
   static const routeFullPath = '/Welcome/HostingSignUp';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('📱 HostingSignUpScreen !!! ');
+    print('📱 build HostingSignUpScreen ');
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;

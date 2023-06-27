@@ -8,7 +8,7 @@ class WelcomeScreen extends StatelessWidget {
   static const routePath = '/Welcome';
   @override
   Widget build(BuildContext context) {
-    print('📱 WelcomeScreen !!! ');
+    print('📱 build WelcomeScreen ');
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;

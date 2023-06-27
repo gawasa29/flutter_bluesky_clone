@@ -13,7 +13,7 @@ class HandleNameEntryScreen extends ConsumerWidget {
   static const routeFullPath = '/Welcome/HostingSignUp/SignUp/HandleNameEntry';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('📱 HandleNameEntryScreen !!! ');
+    print('📱 build HandleNameEntryScreen ');
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
