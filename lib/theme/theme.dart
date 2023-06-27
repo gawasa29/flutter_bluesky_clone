@@ -31,6 +31,12 @@ class BlueSkyTheme extends ThemeExtension<BlueSkyTheme> {
       extensions: [this],
       colorScheme: colorScheme,
       visualDensity: VisualDensity.adaptivePlatformDensity,
+      inputDecorationTheme: const InputDecorationTheme(
+        border: OutlineInputBorder(),
+        contentPadding: EdgeInsets.symmetric(
+          vertical: 1,
+        ),
+      ),
     );
   }
 

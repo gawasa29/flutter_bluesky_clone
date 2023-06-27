@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/features/auth/view/hosting_sign_up_screen.dart';
+import 'package:flutter_bluesky_clone/features/auth/view/sign_in_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -33,7 +36,9 @@ class WelcomeScreen extends StatelessWidget {
               ),
               Expanded(child: Container()),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.go(HostingSignUpScreen.routeFullPath);
+                },
                 style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 60),
                     backgroundColor: colors.primary),
@@ -47,7 +52,9 @@ class WelcomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.go(SignInScreen.routeFullPath);
+                },
                 style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 60),
                     backgroundColor: colors.secondary),
