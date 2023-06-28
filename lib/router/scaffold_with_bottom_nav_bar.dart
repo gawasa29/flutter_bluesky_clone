@@ -81,7 +81,7 @@ class _ScaffoldWithBottomNavBarState
   }
 }
 
-class ScrollToHideWidget extends StatefulWidget {
+class ScrollToHideWidget extends StatelessWidget {
   const ScrollToHideWidget({
     required this.child,
     required this.isVisible,
@@ -93,18 +93,14 @@ class ScrollToHideWidget extends StatefulWidget {
   final double height;
   final Duration duration;
   final bool isVisible;
-
-  @override
-  State<ScrollToHideWidget> createState() => _ScrollToHideWidgetState();
-}
-
-class _ScrollToHideWidgetState extends State<ScrollToHideWidget> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: widget.duration,
-      height: widget.isVisible ? widget.height : 0,
-      child: Wrap(children: [widget.child]),
+      duration: duration,
+      height: isVisible ? height : 0,
+      child: Wrap(
+        children: [child],
+      ),
     );
   }
 }
