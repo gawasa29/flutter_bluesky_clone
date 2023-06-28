@@ -1,10 +1,11 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/handle_name_entry_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/hosting_sign_up_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/sign_in_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/sign_up_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/welcome_screen.dart';
 import 'package:flutter_bluesky_clone/features/notification/view/notification_screen.dart';
+import 'package:flutter_bluesky_clone/features/post/view/compose_post_screen.dart';
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:flutter_bluesky_clone/features/search/view/search_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/profile_screen.dart';
@@ -83,7 +84,14 @@ final routerProvider = Provider(
               ),
             ),
           ],
-        )
+        ),
+        GoRoute(
+          path: ComposePostScreen.routePath,
+          pageBuilder: (context, state) => const MaterialPage(
+            fullscreenDialog: true,
+            child: ComposePostScreen(),
+          ),
+        ),
       ],
     );
   },
