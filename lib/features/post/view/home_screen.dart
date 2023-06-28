@@ -184,12 +184,70 @@ class EachPost extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              InkWell(
-                                onTap: () {
-                                  print('Tap more_horiz');
+                              PopupMenuButton<int>(
+                                icon: const Icon(Icons.more_horiz),
+                                position: PopupMenuPosition.under,
+                                onSelected: print,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                itemBuilder: (context) {
+                                  return [
+                                    const PopupMenuItem(
+                                      value: 0,
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.g_translate),
+                                          SizedBox(width: 5),
+                                          Text('Translate...'),
+                                        ],
+                                      ),
+                                    ),
+                                    const PopupMenuItem(
+                                      value: 1,
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.copy_rounded),
+                                          SizedBox(width: 5),
+                                          Text('Copy post text'),
+                                        ],
+                                      ),
+                                    ),
+                                    const PopupMenuItem(
+                                      value: 2,
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.reply),
+                                          SizedBox(width: 5),
+                                          Text('Share...'),
+                                        ],
+                                      ),
+                                    ),
+                                    const PopupMenuDivider(),
+                                    const PopupMenuItem(
+                                      value: 3,
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.speaker_notes_off),
+                                          SizedBox(width: 5),
+                                          Text('Mute thread'),
+                                        ],
+                                      ),
+                                    ),
+                                    const PopupMenuDivider(),
+                                    const PopupMenuItem(
+                                      value: 4,
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.delete),
+                                          SizedBox(width: 5),
+                                          Text('Delete post'),
+                                        ],
+                                      ),
+                                    ),
+                                  ];
                                 },
-                                child: const Icon(Icons.more_horiz),
-                              ),
+                              )
                             ],
                           ),
                         ),
