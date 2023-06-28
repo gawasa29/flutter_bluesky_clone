@@ -3,6 +3,14 @@ import 'package:flutter_bluesky_clone/features/auth/view/sign_up_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+enum HostingOption { bluesky, other }
+
+final hostingSelectionStateProvider =
+    StateProvider((ref) => HostingOption.bluesky);
+
+final showErrorContainerProvider = StateProvider<bool>((ref) => false);
+final urlProvider = StateProvider<String>((ref) => 'https://');
+
 class HostingSignUpScreen extends ConsumerWidget {
   const HostingSignUpScreen({super.key});
   static const routePath = 'HostingSignUp';
@@ -200,11 +208,3 @@ class HostingSignUpScreen extends ConsumerWidget {
     );
   }
 }
-
-enum HostingOption { bluesky, other }
-
-final hostingSelectionStateProvider =
-    StateProvider((ref) => HostingOption.bluesky);
-
-final showErrorContainerProvider = StateProvider<bool>((ref) => false);
-final urlProvider = StateProvider<String>((ref) => 'https://');
