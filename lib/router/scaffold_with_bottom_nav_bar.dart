@@ -3,71 +3,108 @@ import 'package:flutter_bluesky_clone/features/notification/view/notification_sc
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:flutter_bluesky_clone/features/search/view/search_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/profile_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class ScaffoldWithBottomNavBar extends StatefulWidget {
+final isVisibleProvider = StateProvider<bool>((ref) => true);
+
+class ScaffoldWithBottomNavBar extends ConsumerStatefulWidget {
   const ScaffoldWithBottomNavBar({required this.child, super.key});
 
   final Widget child;
+
   @override
-  State<ScaffoldWithBottomNavBar> createState() =>
+  ConsumerState<ConsumerStatefulWidget> createState() =>
       _ScaffoldWithBottomNavBarState();
 }
 
-class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
+class _ScaffoldWithBottomNavBarState
+    extends ConsumerState<ScaffoldWithBottomNavBar> {
   int _navIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
+      bottomNavigationBar: ScrollToHideWidget(
+        height: 100,
+        isVisible: ref.watch(isVisibleProvider),
+        child: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+              ),
+              label: '',
             ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+              ),
+              label: '',
             ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.notifications,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.notifications,
+              ),
+              label: '',
             ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.account_circle,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_circle,
+              ),
+              label: '',
             ),
-            label: '',
-          ),
-        ],
-        onTap: (int index) {
-          _navIndex = index;
-          switch (index) {
-            case 0:
-              context.go(HomeScreen.routePath);
-            case 1:
-              context.go(SearchScreen.routePath);
-            case 2:
-              context.go(NotificationScreen.routePath);
-            case 3:
-              context.go(ProfileScreen.routePath);
-            default:
-              context.go(HomeScreen.routePath);
-          }
-        },
-        currentIndex: _navIndex,
-        type: BottomNavigationBarType.fixed,
-        iconSize: 33,
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
+          ],
+          onTap: (int index) {
+            _navIndex = index;
+            switch (index) {
+              case 0:
+                context.go(HomeScreen.routePath);
+              case 1:
+                context.go(SearchScreen.routePath);
+              case 2:
+                context.go(NotificationScreen.routePath);
+              case 3:
+                context.go(ProfileScreen.routePath);
+              default:
+                context.go(HomeScreen.routePath);
+            }
+          },
+          currentIndex: _navIndex,
+          type: BottomNavigationBarType.fixed,
+          iconSize: 33,
+          showUnselectedLabels: false,
+          showSelectedLabels: false,
+        ),
       ),
       body: widget.child,
+    );
+  }
+}
+
+class ScrollToHideWidget extends StatefulWidget {
+  const ScrollToHideWidget({
+    required this.child,
+    required this.isVisible,
+    required this.height,
+    super.key,
+    this.duration = const Duration(milliseconds: 200),
+  });
+  final Widget child;
+  final double height;
+  final Duration duration;
+  final bool isVisible;
+
+  @override
+  State<ScrollToHideWidget> createState() => _ScrollToHideWidgetState();
+}
+
+class _ScrollToHideWidgetState extends State<ScrollToHideWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: widget.duration,
+      height: widget.isVisible ? widget.height : 0,
+      child: Wrap(children: [widget.child]),
     );
   }
 }

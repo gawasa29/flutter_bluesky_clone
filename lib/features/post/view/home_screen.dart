@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/router/scaffold_with_bottom_nav_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
   static const routePath = '/Home';
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     print('📱 build HomeScreen ');
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
+    final scrollController = ScrollController();
+    var lastScrollOffset = 0.0;
+    scrollController.addListener(() {
+      if (scrollController.offset > lastScrollOffset) {
+        ref.watch(isVisibleProvider.notifier).update((state) => false);
+      } else if (scrollController.offset < lastScrollOffset) {
+        ref.watch(isVisibleProvider.notifier).update((state) => true);
+      }
+      lastScrollOffset = scrollController.offset;
+    });
     return Scaffold(
       body: CustomScrollView(
+        controller: scrollController,
         slivers: [
           SliverAppBar(
             expandedHeight: 80,
