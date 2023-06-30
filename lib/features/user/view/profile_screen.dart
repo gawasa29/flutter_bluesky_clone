@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/features/post/view/compose_post_screen.dart';
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/edit_profile_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -203,6 +204,12 @@ class ProfileScreen extends ConsumerWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.push(ComposePostScreen.routePath);
+        },
+        child: const Icon(Icons.edit_square),
       ),
     );
   }
