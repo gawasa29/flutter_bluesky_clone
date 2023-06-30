@@ -8,6 +8,7 @@ import 'package:flutter_bluesky_clone/features/notification/view/notification_sc
 import 'package:flutter_bluesky_clone/features/post/view/compose_post_screen.dart';
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:flutter_bluesky_clone/features/search/view/search_screen.dart';
+import 'package:flutter_bluesky_clone/features/user/view/edit_profile_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/profile_screen.dart';
 import 'package:flutter_bluesky_clone/router/scaffold_with_bottom_nav_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -82,6 +83,13 @@ final routerProvider = Provider(
               pageBuilder: (context, state) => const NoTransitionPage(
                 child: ProfileScreen(),
               ),
+              routes: [
+                GoRoute(
+                  path: EditProfileScreen.routePath,
+                  pageBuilder: (context, state) =>
+                      const NoTransitionPage(child: EditProfileScreen()),
+                ),
+              ],
             ),
           ],
         ),
