@@ -77,6 +77,7 @@ class EachUser extends StatelessWidget {
     final typography = theme.textTheme;
     return Column(
       children: [
+        const SizedBox(height: 10),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
