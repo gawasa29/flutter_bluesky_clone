@@ -9,6 +9,7 @@ import 'package:flutter_bluesky_clone/features/post/view/compose_post_screen.dar
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:flutter_bluesky_clone/features/search/view/search_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/edit_profile_screen.dart';
+import 'package:flutter_bluesky_clone/features/user/view/moderation_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/profile_screen.dart';
 import 'package:flutter_bluesky_clone/router/scaffold_with_bottom_nav_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -99,6 +100,10 @@ final routerProvider = Provider(
             fullscreenDialog: true,
             child: ComposePostScreen(),
           ),
+        ),
+        GoRoute(
+          path: ModerationScreen.routePath,
+          builder: (context, state) => const ModerationScreen(),
         ),
       ],
     );

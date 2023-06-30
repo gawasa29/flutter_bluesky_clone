@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/features/user/view/moderation_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -105,7 +107,9 @@ class CustomDrawer extends StatelessWidget {
             title: const Text('Notifications'),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              context.push(ModerationScreen.routePath);
+            },
             leading: const Icon(Icons.back_hand),
             title: const Text('Moderation'),
           ),
