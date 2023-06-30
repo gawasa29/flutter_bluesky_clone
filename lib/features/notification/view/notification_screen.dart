@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_drawer.dart';
+import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -10,7 +11,7 @@ class NotificationScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
-    return Scaffold(
+    return CustomScaffold(
         drawer: const CustomDrawer(),
         appBar: AppBar(
           title: Text(

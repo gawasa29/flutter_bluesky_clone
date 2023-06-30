@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,7 +17,7 @@ class ComposePostScreen extends ConsumerWidget {
     final typography = theme.textTheme;
     final currentCharacters = ref.watch(circleIndicatorProvider);
     const maxCharacters = 300;
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
         leadingWidth: 100,
         leading: TextButton(

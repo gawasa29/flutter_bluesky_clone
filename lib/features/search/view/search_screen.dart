@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_drawer.dart';
+import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchScreen extends ConsumerWidget {
@@ -12,7 +13,7 @@ class SearchScreen extends ConsumerWidget {
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
     final searchController = TextEditingController();
-    return Scaffold(
+    return CustomScaffold(
       drawer: const CustomDrawer(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100),

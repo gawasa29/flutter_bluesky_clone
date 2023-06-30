@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/handle_name_entry_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -22,7 +23,7 @@ class SignUpScreen extends ConsumerWidget {
     final inviteController = ref.watch(inviteControllerProvider);
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
-    return Scaffold(
+    return CustomScaffold(
       body: SafeArea(
         child: ListView(
           children: [

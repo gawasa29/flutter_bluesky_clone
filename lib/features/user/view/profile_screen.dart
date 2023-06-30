@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/post/view/compose_post_screen.dart';
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/edit_profile_screen.dart';
@@ -14,7 +15,7 @@ class ProfileScreen extends ConsumerWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
-    return Scaffold(
+    return CustomScaffold(
       body: SafeArea(
         child: CustomScrollView(
           slivers: [

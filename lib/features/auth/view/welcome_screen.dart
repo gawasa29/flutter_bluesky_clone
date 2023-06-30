@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/hosting_sign_up_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/sign_in_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -12,7 +13,7 @@ class WelcomeScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
-    return Scaffold(
+    return CustomScaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, bottom: 60),

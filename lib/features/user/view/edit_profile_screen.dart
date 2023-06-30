@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:go_router/go_router.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class EditProfileScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
-    return Scaffold(
+    return CustomScaffold(
       body: SafeArea(
         child: ListView(
           shrinkWrap: true,

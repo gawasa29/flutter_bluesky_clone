@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 
 class ModerationScreen extends StatelessWidget {
   const ModerationScreen({super.key});
@@ -9,7 +10,7 @@ class ModerationScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
-    return Scaffold(
+    return CustomScaffold(
       backgroundColor: colors.secondary,
       appBar: AppBar(
         title: Text(

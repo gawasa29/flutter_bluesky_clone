@@ -12,51 +12,56 @@ class SignInScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: false,
-        title: Text(
-          'Sign in as...',
-          style: typography.titleMedium!.copyWith(),
-        ),
-        bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(5),
-            child: Container(
-              height: 1,
-              color: colors.secondary,
-            )),
-      ),
-      body: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: colors.secondary),
+    return Center(
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 600),
+        child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            centerTitle: false,
+            title: Text(
+              'Sign in as...',
+              style: typography.titleMedium!.copyWith(),
             ),
-            child: ListTile(
-              onTap: () {},
-              title: const Text('Other account'),
-              trailing: const Icon(Icons.chevron_right),
-            ),
+            bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(5),
+                child: Container(
+                  height: 1,
+                  color: colors.secondary,
+                )),
           ),
-          Row(
+          body: Column(
             children: [
-              TextButton(
-                onPressed: () {
-                  context.pop();
-                },
-                child: const Text('Back'),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: colors.secondary),
+                ),
+                child: ListTile(
+                  onTap: () {},
+                  title: const Text('Other account'),
+                  trailing: const Icon(Icons.chevron_right),
+                ),
               ),
-              Expanded(child: Container()),
-              TextButton(
-                onPressed: () {
-                  context.go(HomeScreen.routePath);
-                },
-                child: const Text('Next'),
+              Row(
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      context.pop();
+                    },
+                    child: const Text('Back'),
+                  ),
+                  Expanded(child: Container()),
+                  TextButton(
+                    onPressed: () {
+                      context.go(HomeScreen.routePath);
+                    },
+                    child: const Text('Next'),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/sign_up_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -25,7 +26,7 @@ class HostingSignUpScreen extends ConsumerWidget {
     final url = ref.watch(urlProvider);
     final urlController = TextEditingController(text: url);
     final showErrorContainer = ref.watch(showErrorContainerProvider);
-    return Scaffold(
+    return CustomScaffold(
       body: SafeArea(
         child: ListView(
           children: [

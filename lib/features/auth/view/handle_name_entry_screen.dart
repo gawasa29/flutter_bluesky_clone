@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -19,7 +20,7 @@ class HandleNameEntryScreen extends ConsumerWidget {
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
     final handleNameController = ref.watch(handleNameControllerProvider);
-    return Scaffold(
+    return CustomScaffold(
       body: SafeArea(
         child: ListView(
           children: [
