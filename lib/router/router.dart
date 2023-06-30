@@ -11,6 +11,7 @@ import 'package:flutter_bluesky_clone/features/search/view/search_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/edit_profile_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/moderation_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/profile_screen.dart';
+import 'package:flutter_bluesky_clone/features/user/view/settings_screen.dart';
 import 'package:flutter_bluesky_clone/router/scaffold_with_bottom_nav_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -104,6 +105,10 @@ final routerProvider = Provider(
         GoRoute(
           path: ModerationScreen.routePath,
           builder: (context, state) => const ModerationScreen(),
+        ),
+        GoRoute(
+          path: SettingsScreen.routePath,
+          builder: (context, state) => const SettingsScreen(),
         ),
       ],
     );

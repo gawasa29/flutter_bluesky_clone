@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/features/user/view/moderation_screen.dart';
+import 'package:flutter_bluesky_clone/features/user/view/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -119,7 +120,9 @@ class CustomDrawer extends StatelessWidget {
             title: const Text('Profile'),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              context.push(SettingsScreen.routePath);
+            },
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),
           ),
