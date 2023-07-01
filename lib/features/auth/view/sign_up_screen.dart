@@ -4,26 +4,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/handle_name_entry_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_%20navigation_button.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-final inviteControllerProvider = ChangeNotifierProvider<TextEditingController>(
-  (ref) => TextEditingController(),
-);
-
-class SignUpScreen extends ConsumerWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
   static const routePath = 'SignUp';
   static const routeFullPath = '/Welcome/HostingSignUp/SignUp';
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final inviteController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    inviteController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     print('📱 build SignUpScreen ');
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
-    final inviteController = ref.watch(inviteControllerProvider);
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
+
     return CustomScaffold(
       body: SafeArea(
         child: ListView(
@@ -53,6 +63,9 @@ class SignUpScreen extends ConsumerWidget {
                       prefixIcon: Icon(Icons.confirmation_number),
                       hintText: 'Required for this provider',
                     ),
+                    onChanged: (value) {
+                      setState(() {});
+                    },
                   ),
                   const SizedBox(height: 10),
                   if (inviteController.text.isEmpty)

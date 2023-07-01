@@ -2,25 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_%20navigation_button.dart';
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-final handleNameControllerProvider =
-    ChangeNotifierProvider<TextEditingController>(
-  (ref) => TextEditingController(),
-);
-
-class HandleNameEntryScreen extends ConsumerWidget {
+class HandleNameEntryScreen extends StatefulWidget {
   const HandleNameEntryScreen({super.key});
   static const routePath = 'HandleNameEntry';
   static const routeFullPath = '/Welcome/HostingSignUp/SignUp/HandleNameEntry';
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  State<HandleNameEntryScreen> createState() => _HandleNameEntryScreenState();
+}
+
+class _HandleNameEntryScreenState extends State<HandleNameEntryScreen> {
+  final handleNameController = TextEditingController();
+
+  @override
+  void dispose() {
+    handleNameController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     print('📱 build HandleNameEntryScreen ');
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
-    final handleNameController = ref.watch(handleNameControllerProvider);
+
     return CustomScaffold(
       body: SafeArea(
         child: ListView(
@@ -49,6 +56,7 @@ class HandleNameEntryScreen extends ConsumerWidget {
                       prefixIcon: Icon(Icons.alternate_email),
                       hintText: 'e.g alice',
                     ),
+                    onChanged: (value) => setState(() {}),
                   ),
                   const SizedBox(height: 10),
                   Text(

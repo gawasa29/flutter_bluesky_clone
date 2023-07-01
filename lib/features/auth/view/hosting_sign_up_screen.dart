@@ -2,31 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/sign_up_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_%20navigation_button.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 enum HostingOption { bluesky, other }
 
-final hostingSelectionStateProvider =
-    StateProvider((ref) => HostingOption.bluesky);
-
-final showErrorContainerProvider = StateProvider<bool>((ref) => false);
-final urlProvider = StateProvider<String>((ref) => 'https://');
-
-class HostingSignUpScreen extends ConsumerWidget {
+class HostingSignUpScreen extends StatefulWidget {
   const HostingSignUpScreen({super.key});
   static const routePath = 'HostingSignUp';
   static const routeFullPath = '/Welcome/HostingSignUp';
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  State<HostingSignUpScreen> createState() => _HostingSignUpScreenState();
+}
+
+class _HostingSignUpScreenState extends State<HostingSignUpScreen> {
+  HostingOption hostingSelection = HostingOption.bluesky;
+  final urlController = TextEditingController(text: 'https://');
+  bool showErrorContainer = false;
+
+  @override
+  void dispose() {
+    urlController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     print('📱 build HostingSignUpScreen ');
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
-    final hostingSelectionProvider = ref.watch(hostingSelectionStateProvider);
-    final url = ref.watch(urlProvider);
-    final urlController = TextEditingController(text: url);
-    final showErrorContainer = ref.watch(showErrorContainerProvider);
+
     return CustomScaffold(
       body: SafeArea(
         child: ListView(
@@ -59,11 +64,10 @@ class HostingSignUpScreen extends ConsumerWidget {
                     child: RadioListTile(
                       title: const Text('Bluesky (default)'),
                       value: HostingOption.bluesky,
-                      groupValue: hostingSelectionProvider,
+                      groupValue: hostingSelection,
                       onChanged: (value) {
-                        ref
-                            .watch(hostingSelectionStateProvider.notifier)
-                            .state = value!;
+                        hostingSelection = value!;
+                        setState(() {});
                       },
                     ),
                   ),
@@ -79,14 +83,13 @@ class HostingSignUpScreen extends ConsumerWidget {
                         RadioListTile(
                           title: const Text('Other'),
                           value: HostingOption.other,
-                          groupValue: hostingSelectionProvider,
+                          groupValue: hostingSelection,
                           onChanged: (value) {
-                            ref
-                                .watch(hostingSelectionStateProvider.notifier)
-                                .state = value!;
+                            hostingSelection = value!;
+                            setState(() {});
                           },
                         ),
-                        if (hostingSelectionProvider == HostingOption.other)
+                        if (hostingSelection == HostingOption.other)
                           Padding(
                             padding: const EdgeInsets.all(8),
                             child: Column(
@@ -103,24 +106,20 @@ class HostingSignUpScreen extends ConsumerWidget {
                                   children: [
                                     ElevatedButton(
                                       onPressed: () {
-                                        ref
-                                            .read(showErrorContainerProvider
-                                                .notifier)
-                                            .state = false;
-                                        ref.read(urlProvider.notifier).state =
+                                        showErrorContainer = false;
+                                        urlController.text =
                                             'https://staging.bsky.dev';
+                                        setState(() {});
                                       },
                                       child: const Text('Staging'),
                                     ),
                                     const SizedBox(width: 5),
                                     ElevatedButton(
                                       onPressed: () {
-                                        ref
-                                            .read(showErrorContainerProvider
-                                                .notifier)
-                                            .state = true;
-                                        ref.read(urlProvider.notifier).state =
+                                        showErrorContainer = true;
+                                        urlController.text =
                                             'http://localhost:2583';
+                                        setState(() {});
                                       },
                                       child: const Text('Dev Server'),
                                     ),
