@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
+import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -63,11 +64,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const SizedBox(height: 10),
             ListTile(
               tileColor: colors.background,
-              leading: const CircleAvatar(
-                radius: 19,
-                backgroundImage: NetworkImage(
-                    'https://images.unsplash.com/photo-1491349174775-aaafddd81942?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80'),
-              ),
+              leading: const UserPic(radius: 19),
               title: const Text('User Name'),
               subtitle: Text(
                 '@HandleName',

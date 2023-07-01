@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_drawer.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
+import 'package:flutter_bluesky_clone/features/user/view/widgets/user_info.dart';
+import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchScreen extends ConsumerWidget {
@@ -61,8 +63,12 @@ class SearchScreen extends ConsumerWidget {
               )),
         ),
       ),
-      body: ListView.builder(
+      body: ListView.separated(
         itemBuilder: (context, index) => const EachUser(),
+        itemCount: 10,
+        separatorBuilder: (context, _) {
+          return const Divider(thickness: 0.5);
+        },
       ),
     );
   }
@@ -83,11 +89,7 @@ class EachUser extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(width: 10),
-            const CircleAvatar(
-              radius: 20,
-              backgroundImage: NetworkImage(
-                  'https://images.unsplash.com/photo-1491349174775-aaafddd81942?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80'),
-            ),
+            const UserPic(radius: 20),
             const SizedBox(width: 20),
             Expanded(
               child: Column(
@@ -95,21 +97,7 @@ class EachUser extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Column(
-                        children: [
-                          Text(
-                            'UserName',
-                            style: typography.titleMedium!.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            '@HandleName',
-                            style: typography.bodySmall!
-                                .copyWith(color: colors.onSecondary),
-                          ),
-                        ],
-                      ),
+                      const UserInfo(),
                       Expanded(child: Container()),
                       ElevatedButton(
                         onPressed: () {},
@@ -136,7 +124,6 @@ class EachUser extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        const Divider(thickness: 0.5),
       ],
     );
   }

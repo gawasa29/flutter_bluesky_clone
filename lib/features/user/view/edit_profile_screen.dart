@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
+import 'package:flutter_bluesky_clone/features/user/view/widgets/background_pic.dart';
+import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:go_router/go_router.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -32,20 +34,7 @@ class EditProfileScreen extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      const SizedBox(
-                        width: double.infinity,
-                        height: 150,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                'https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png',
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
+                      const BackgroundPic(),
                       InkWell(
                         onTap: () {},
                         child: Container(
@@ -67,12 +56,7 @@ class EditProfileScreen extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      const CircleAvatar(
-                        radius: 40,
-                        backgroundImage: NetworkImage(
-                          'https://images.unsplash.com/photo-1491349174775-aaafddd81942?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-                        ),
-                      ),
+                      const UserPic(radius: 40),
                       Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,

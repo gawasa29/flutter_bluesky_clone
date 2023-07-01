@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
+import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -48,11 +49,7 @@ class ComposePostScreen extends ConsumerWidget {
               children: [
                 const Padding(
                   padding: EdgeInsets.all(8),
-                  child: CircleAvatar(
-                    radius: 35,
-                    backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1491349174775-aaafddd81942?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80'),
-                  ),
+                  child: UserPic(radius: 35),
                 ),
                 Flexible(
                   child: Padding(
