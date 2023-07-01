@@ -2,21 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-final circleIndicatorProvider = StateProvider.autoDispose<int>((ref) => 0);
-
-class ComposePostScreen extends ConsumerWidget {
+class ComposePostScreen extends StatefulWidget {
   const ComposePostScreen({super.key});
   static const routePath = '/ComposePost';
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  State<ComposePostScreen> createState() => _ComposePostScreenState();
+}
+
+class _ComposePostScreenState extends State<ComposePostScreen> {
+  int currentCharacters = 0;
+  @override
+  Widget build(BuildContext context) {
     print('📱 build ComposePostScreen ');
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
-    final currentCharacters = ref.watch(circleIndicatorProvider);
+
     const maxCharacters = 300;
     return CustomScaffold(
       appBar: AppBar(
@@ -66,9 +69,8 @@ class ComposePostScreen extends ConsumerWidget {
                         hintText: "What's up?",
                       ),
                       onChanged: (text) {
-                        ref
-                            .read(circleIndicatorProvider.notifier)
-                            .update((state) => text.length);
+                        currentCharacters = text.length;
+                        setState(() {});
                       },
                     ),
                   ),
