@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_%20navigation_button.dart';
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -42,22 +43,10 @@ class SignInScreen extends StatelessWidget {
                   trailing: const Icon(Icons.chevron_right),
                 ),
               ),
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      context.pop();
-                    },
-                    child: const Text('Back'),
-                  ),
-                  Expanded(child: Container()),
-                  TextButton(
-                    onPressed: () {
-                      context.go(HomeScreen.routePath);
-                    },
-                    child: const Text('Next'),
-                  ),
-                ],
+              CustomNavigationButton(
+                onPressed: () {
+                  context.go(HomeScreen.routePath);
+                },
               ),
             ],
           ),
