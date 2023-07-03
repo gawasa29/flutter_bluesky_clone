@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/sign_up_screen.dart';
-import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_%20navigation_button.dart';
+import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_navigation_button.dart';
 import 'package:go_router/go_router.dart';
 
 enum HostingOption { bluesky, other }

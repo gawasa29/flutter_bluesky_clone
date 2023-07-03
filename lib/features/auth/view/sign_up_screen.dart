@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/handle_name_entry_screen.dart';
-import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_%20navigation_button.dart';
+import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_navigation_button.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatefulWidget {

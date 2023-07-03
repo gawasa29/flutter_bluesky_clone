@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_%20navigation_button.dart';
+import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_navigation_button.dart';
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
