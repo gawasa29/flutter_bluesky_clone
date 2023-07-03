@@ -9,41 +9,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  ###  Firebase  ###
-  firebase_core: any
-  firebase_auth: any
-  cloud_firestore: any
-  firebase_storage: any
-  cloud_functions: any
-  google_sign_in: any
-
   ###  State Management  ###
   flutter_riverpod: any
-  freezed_annotation: any
-  json_serializable: any
-
   ###  Routing  ###
   go_router: any
-
-  ###  Image  ###
-  image_picker: any
-  cached_network_image: any
-  image_cropper: any
-
-  ###  UI/UX  ###
-  flutterfire_ui: any
-  detectable_text_field: any
-  shimmer: any
-  fluttertoast: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  integration_test:
-    sdk: flutter
   very_good_analysis: ^5.0.0+1
-  build_runner: any
-  freezed: any
 
 flutter:
   uses-material-design: true
