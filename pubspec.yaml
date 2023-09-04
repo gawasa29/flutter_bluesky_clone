@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  ###  API  ###
+  bluesky: ^0.8.9
   ###  State Management  ###
   flutter_riverpod: any
   ###  Routing  ###
