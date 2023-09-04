@@ -121,8 +121,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           TextSpan(
                             children: [
                               const TextSpan(
-                                  text:
-                                      'By creating an account you agree to the '),
+                                text:
+                                    'By creating an account you agree to the ',
+                              ),
                               TextSpan(
                                 text: 'Terms of Service',
                                 style:
@@ -143,7 +144,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ],
                             style: typography.bodyMedium!.copyWith(),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   CustomNavigationButton(
@@ -153,7 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
