@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final themeProvider = Provider<BlueSkyTheme>((ref) {
-  return const BlueSkyTheme();
-});
+part 'theme.g.dart';
+
+@riverpod
+AppTheme theme(ThemeRef ref) {
+  return const AppTheme();
+}
 
 @immutable
-class BlueSkyTheme extends ThemeExtension<BlueSkyTheme> {
-  const BlueSkyTheme({
+class AppTheme extends ThemeExtension<AppTheme> {
+  const AppTheme({
     this.primaryColor = const Color(0xFF0085FF),
     this.secondaryColor = const Color(0xFFF3F3F8),
     this.neutralColor = const Color(0xFF545664),
@@ -53,14 +57,14 @@ class BlueSkyTheme extends ThemeExtension<BlueSkyTheme> {
   }
 
   @override
-  ThemeExtension<BlueSkyTheme> copyWith({
+  ThemeExtension<AppTheme> copyWith({
     Color? primaryColor,
     Color? secondaryColor,
     Color? neutralColor,
     Color? errorColor,
     Color? backgroundColor,
   }) =>
-      BlueSkyTheme(
+      AppTheme(
         primaryColor: primaryColor ?? this.primaryColor,
         secondaryColor: secondaryColor ?? this.secondaryColor,
         neutralColor: neutralColor ?? this.neutralColor,
@@ -69,12 +73,12 @@ class BlueSkyTheme extends ThemeExtension<BlueSkyTheme> {
       );
 
   @override
-  BlueSkyTheme lerp(
-    covariant ThemeExtension<BlueSkyTheme>? other,
+  AppTheme lerp(
+    covariant ThemeExtension<AppTheme>? other,
     double t,
   ) {
-    if (other is! BlueSkyTheme) return this;
-    return BlueSkyTheme(
+    if (other is! AppTheme) return this;
+    return AppTheme(
       primaryColor: Color.lerp(primaryColor, other.primaryColor, t)!,
       secondaryColor: Color.lerp(secondaryColor, other.secondaryColor, t)!,
       neutralColor: Color.lerp(neutralColor, other.neutralColor, t)!,
