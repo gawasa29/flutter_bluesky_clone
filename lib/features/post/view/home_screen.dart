@@ -43,7 +43,7 @@ class HomeScreen extends ConsumerWidget {
               ),
             ),
             actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
+              IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
             ],
             bottom: const PreferredSize(
               preferredSize: Size.fromHeight(5),
@@ -63,7 +63,12 @@ class HomeScreen extends ConsumerWidget {
         onPressed: () {
           context.push(ComposePostScreen.routePath);
         },
-        child: const Icon(Icons.edit_square),
+        shape: const CircleBorder(),
+        backgroundColor: colors.primary,
+        child: Icon(
+          Icons.edit_square,
+          color: colors.onPrimary,
+        ),
       ),
     );
   }

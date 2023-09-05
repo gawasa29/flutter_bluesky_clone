@@ -2,9 +2,9 @@ import 'package:bluesky/bluesky.dart' as bsky;
 import 'package:bluesky/bluesky.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/blue_sky_app.dart';
+import 'package:flutter_bluesky_clone/common/util/calculate_height.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/post/view/compose_post_screen.dart';
-import 'package:flutter_bluesky_clone/features/post/view/widgets/each_post.dart';
 import 'package:flutter_bluesky_clone/features/user/repository/user_repository.dart';
 import 'package:flutter_bluesky_clone/features/user/view/edit_profile_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/background_pic.dart';
@@ -29,93 +29,112 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     print('📱 build ProfileScreen ');
     final theme = Theme.of(context);
+    final colors = theme.colorScheme;
     final typography = theme.textTheme;
 
     final profile = ref.watch(fetchProfileProvider);
 
     return CustomScaffold(
-      body: profile.when(
-        error: (error, stackTrace) => Text('Error $error'),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        data: (profile) {
-          return SafeArea(
-            child: CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  pinned: true,
-                  expandedHeight: 360,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Column(
-                      children: [
-                        Stack(
-                          children: <Widget>[
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const BackgroundPic(),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
+      body: SafeArea(
+        child: profile.when(
+          error: (error, stackTrace) => Text('Error $error'),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          data: (profile) {
+            return DefaultTabController(
+              length: 2,
+              child: NestedScrollView(
+                headerSliverBuilder: (context, innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverAppBar(
+                      pinned: true,
+                      expandedHeight: calculateExpandedHeight(
+                        context: context,
+                        bioText: profile.description ?? '',
+                        textStyle: typography.bodyLarge!,
+                      ),
+                      flexibleSpace: FlexibleSpaceBar(
+                        background: Column(
+                          children: [
+                            Stack(
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        context.go(
-                                          EditProfileScreen.routeFullPath,
-                                        );
-                                      },
-                                      child: Text(
-                                        'Edit Profile',
-                                        style: typography.bodySmall!.copyWith(
-                                          fontWeight: FontWeight.bold,
+                                    const BackgroundPic(),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            context.go(
+                                              EditProfileScreen.routeFullPath,
+                                            );
+                                          },
+                                          child: Text(
+                                            'Edit Profile',
+                                            style:
+                                                typography.bodySmall!.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
                                         ),
+                                        const SizedBox(width: 10),
+                                        const ProfilePopUpMenuButton(),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: ProfileUserInfo(
+                                        handle: profile.handle,
+                                        displayName: profile.displayName,
+                                        followersCount: profile.followersCount,
+                                        followsCount: profile.followsCount,
+                                        postsCount: profile.postsCount,
                                       ),
                                     ),
-                                    const SizedBox(width: 10),
-                                    const ProfilePopUpMenuButton(),
+                                    Text(
+                                      profile.description ?? '',
+                                      maxLines: 30,
+                                    ),
                                   ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: ProfileUserInfo(
-                                    handle: profile.handle,
-                                    displayName: profile.displayName,
-                                    followersCount: profile.followersCount,
-                                    followsCount: profile.followsCount,
-                                    postsCount: profile.postsCount,
-                                  ),
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 110, left: 10),
+                                  child: UserPic(radius: 40),
                                 ),
                               ],
                             ),
-                            const Padding(
-                              padding: EdgeInsets.only(top: 110, left: 10),
-                              child: UserPic(radius: 40),
-                            ),
                           ],
                         ),
-                      ],
+                      ),
+                      bottom: const PreferredSize(
+                        preferredSize: Size.fromHeight(5),
+                        child: ProfileTabBar(),
+                      ),
                     ),
-                  ),
-                  bottom: const PreferredSize(
-                    preferredSize: Size.fromHeight(5),
-                    child: ProfileTabBar(),
-                  ),
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return const EachPost();
-                    },
+                  ];
+                },
+                body: const DefaultTabController(
+                  length: 0,
+                  child: TabBarView(
+                    children: [],
                   ),
                 ),
-              ],
-            ),
-          );
-        },
+              ),
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.push(ComposePostScreen.routePath);
         },
-        child: const Icon(Icons.edit_square),
+        shape: const CircleBorder(),
+        backgroundColor: colors.primary,
+        child: Icon(
+          Icons.edit_square,
+          color: colors.onPrimary,
+        ),
       ),
     );
   }
@@ -253,24 +272,21 @@ class ProfileTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const TabBar(
-            tabs: [
-              Text(
-                'Posts',
-              ),
-              Text(
-                'Posts & replies',
-              ),
-            ],
-          ),
-          Container(height: 1),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const TabBar(
+          tabs: [
+            Text(
+              'Posts',
+            ),
+            Text(
+              'Posts & replies',
+            ),
+          ],
+        ),
+        Container(height: 1),
+      ],
     );
   }
 }
