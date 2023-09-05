@@ -1,24 +1,84 @@
+import 'package:bluesky/bluesky.dart' as bsky;
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/common/error/error.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
+import 'package:flutter_bluesky_clone/common/widgets/error_banner.dart';
+import 'package:flutter_bluesky_clone/features/auth/repository/auth_repository.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_navigation_button.dart';
+import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
+import 'package:flutter_bluesky_clone/router/router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class SignInFormScreen extends StatefulWidget {
+part 'sign_in_form_screen.g.dart';
+
+@riverpod
+class Session extends _$Session {
+  @override
+  FutureOr<void> build() {}
+
+  Future<void> signIn({
+    required String service,
+    required String id,
+    required String password,
+  }) async {
+    try {
+      state = const AsyncLoading();
+
+      final authRepository = ref.watch(authRepositoryProvider);
+
+      await authRepository.createSession(
+        service: service,
+        id: id,
+        password: password,
+      );
+
+      await authRepository.setService(service);
+      await authRepository.setId(id);
+      await authRepository.setPassword(password);
+
+      state = const AsyncData(null);
+
+      if (state.hasError == false) {
+        ref.read(routerProvider).go(HomeScreen.routePath);
+      }
+    } on bsky.UnauthorizedException catch (e, stackTrace) {
+      final errorMessage = parseError(e);
+
+      if (errorMessage == null) return;
+
+      state = AsyncError(errorMessage, stackTrace);
+    } on bsky.XRPCException catch (e, stackTrace) {
+      final errorMessage = parseError(e);
+
+      if (errorMessage == null) return;
+
+      state = AsyncError(errorMessage, stackTrace);
+    }
+  }
+}
+
+class SignInFormScreen extends ConsumerStatefulWidget {
   const SignInFormScreen({super.key});
   static const routePath = 'SignInForm';
   static const routeFullPath = '/Welcome/SignIn/SignInForm';
 
   @override
-  State<SignInFormScreen> createState() => _SignInFormScreenState();
+  ConsumerState<SignInFormScreen> createState() => _SignInFormScreenState();
 }
 
-class _SignInFormScreenState extends State<SignInFormScreen> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+class _SignInFormScreenState extends ConsumerState<SignInFormScreen> {
+  static const _defaultService = 'bsky.social';
+
+  final _serviceController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    _serviceController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -27,6 +87,9 @@ class _SignInFormScreenState extends State<SignInFormScreen> {
     print('📱 build SignInFormScreen ');
     final theme = Theme.of(context);
     final typography = theme.textTheme;
+
+    final session = ref.watch(sessionProvider);
+
     return CustomScaffold(
       body: SafeArea(
         child: ListView(
@@ -62,22 +125,49 @@ class _SignInFormScreenState extends State<SignInFormScreen> {
                     ),
                   ),
                   TextFormField(
-                    controller: emailController,
+                    controller: _usernameController,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.alternate_email),
                       hintText: 'Username or email address',
                     ),
                   ),
                   TextFormField(
-                    controller: passwordController,
+                    controller: _passwordController,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.lock),
                       hintText: 'Password',
                     ),
                   ),
                   const SizedBox(height: 10),
+                  session.when(
+                    error: (error, stackTrace) =>
+                        ErrorBanner(error: error.toString()),
+                    loading: () => const SizedBox(),
+                    data: (_) => const SizedBox(),
+                  ),
                   CustomNavigationButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      final sessionSignIn = ref.read(sessionProvider.notifier);
+                      var service = _serviceController.text.trim();
+                      var id = _usernameController.text.trim();
+                      final password = _passwordController.text.trim();
+
+                      if (service.isEmpty) {
+                        // Force "bsky.social" if the service is not entered
+                        service = _serviceController.text = _defaultService;
+                      }
+
+                      if (!id.contains('.')) {
+                        // Make the domain input optional.
+                        id += '.$service';
+                      }
+
+                      await sessionSignIn.signIn(
+                        service: service,
+                        id: id,
+                        password: password,
+                      );
+                    },
                   ),
                 ],
               ),

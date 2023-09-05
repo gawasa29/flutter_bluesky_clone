@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
+import 'package:flutter_bluesky_clone/common/widgets/error_banner.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/sign_up_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_navigation_button.dart';
 import 'package:go_router/go_router.dart';
@@ -95,7 +96,8 @@ class _HostingSignUpScreenState extends State<HostingSignUpScreen> {
                             child: Column(
                               children: [
                                 const Text(
-                                    'Enter the address of your provider:'),
+                                  'Enter the address of your provider:',
+                                ),
                                 TextFormField(
                                   controller: urlController,
                                   decoration: const InputDecoration(
@@ -133,31 +135,9 @@ class _HostingSignUpScreenState extends State<HostingSignUpScreen> {
                   ),
                   const SizedBox(height: 10),
                   if (showErrorContainer)
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: colors.error,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.all(8),
-                            child: Icon(Icons.report_gmailerrorred),
-                          ),
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Text(
-                                'Unable to contact your service. Please check your Internet connection.',
-                                style: typography.bodyMedium!.copyWith(
-                                  color: colors.background,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    const ErrorBanner(
+                      error:
+                          'Unable to contact your service. Please check your Internet connection.',
                     )
                   else
                     Container(
