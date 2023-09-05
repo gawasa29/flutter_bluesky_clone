@@ -60,7 +60,7 @@ class ProfileScreen extends ConsumerWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const BackgroundPic(),
+                                    BackgroundPic(banner: profile.banner),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [

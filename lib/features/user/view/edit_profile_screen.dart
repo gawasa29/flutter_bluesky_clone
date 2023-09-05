@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
-import 'package:flutter_bluesky_clone/features/user/view/widgets/background_pic.dart';
 import 'package:go_router/go_router.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -33,7 +32,7 @@ class EditProfileScreen extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      const BackgroundPic(),
+                      // const BackgroundPic(),
                       InkWell(
                         onTap: () {},
                         child: Container(
