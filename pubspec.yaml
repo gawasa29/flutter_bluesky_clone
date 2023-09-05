@@ -9,17 +9,28 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   ###  API  ###
   bluesky: ^0.8.9
+
   ###  State Management  ###
   flutter_riverpod: any
+  riverpod_annotation: any
+
   ###  Routing  ###
   go_router: any
+
+  ###  DB  ###
+  shared_preferences: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   very_good_analysis: any
+  custom_lint: any
+  riverpod_lint: any
+  riverpod_generator: any
+  build_runner: any
 
 flutter:
   uses-material-design: true
