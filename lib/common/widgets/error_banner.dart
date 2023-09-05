@@ -17,9 +17,12 @@ class ErrorBanner extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(8),
-            child: Icon(Icons.report_gmailerrorred),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Icon(
+              Icons.report_gmailerrorred,
+              color: colors.onError,
+            ),
           ),
           Flexible(
             child: Padding(

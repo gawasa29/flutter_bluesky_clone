@@ -11,7 +11,7 @@ class BlueSkyTheme extends ThemeExtension<BlueSkyTheme> {
     this.primaryColor = const Color(0xFF0085FF),
     this.secondaryColor = const Color(0xFFF3F3F8),
     this.neutralColor = const Color(0xFF545664),
-    this.errorColor = const Color(0xFFED4898),
+    this.errorColor = const Color(0xFFBE2C46),
     this.backgroundColor = const Color(0xFFFFFFFF),
   });
 
