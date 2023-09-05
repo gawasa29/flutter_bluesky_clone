@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/sign_in_form_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_navigation_button.dart';
-import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -46,9 +45,7 @@ class SignInScreen extends StatelessWidget {
             ),
           ),
           CustomNavigationButton(
-            onPressed: () {
-              context.go(HomeScreen.routePath);
-            },
+            onPressed: () {},
           ),
         ],
       ),

@@ -39,7 +39,7 @@ final shellNavigatorKeyProvider =
 
 typedef ShellNavigatorKeyRef
     = AutoDisposeProviderRef<GlobalKey<NavigatorState>>;
-String _$routerHash() => r'94bb9d70bf6ffc15b3c7177cb89ce18cc25a7342';
+String _$routerHash() => r'3185200172976d7807ca42d07af73e2ff69fa721';
 
 /// See also [router].
 @ProviderFor(router)

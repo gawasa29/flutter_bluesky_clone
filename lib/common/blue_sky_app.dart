@@ -22,7 +22,7 @@ class BlueSkyApp {
 
     if (service == null || id == null || password == null) {
       print('service:$service id:$id password:$password');
-      return;
+      return session = null;
     }
 
     session = await createSession(

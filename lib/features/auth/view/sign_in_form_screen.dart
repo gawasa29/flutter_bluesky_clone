@@ -1,5 +1,6 @@
 import 'package:bluesky/bluesky.dart' as bsky;
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/common/blue_sky_app.dart';
 import 'package:flutter_bluesky_clone/common/error/error.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/common/widgets/error_banner.dart';
@@ -38,6 +39,9 @@ class Auth extends _$Auth {
       await authRepository.setId(id);
       await authRepository.setPassword(password);
 
+      // To update the session
+      await BlueSkyApp.initializeApp();
+
       state = const AsyncData(null);
 
       if (state.hasError == false) {
@@ -58,12 +62,14 @@ class Auth extends _$Auth {
     }
   }
 
-  void signOut() {
+  Future<void> signOut() async {
     state = const AsyncLoading();
     ref.read(authRepositoryProvider)
       ..removeService()
       ..removeId()
       ..removePassword();
+
+    await BlueSkyApp.initializeApp();
     state = const AsyncData(null);
 
     if (state.hasError == false) {
