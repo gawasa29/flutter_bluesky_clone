@@ -14,112 +14,120 @@ import 'package:flutter_bluesky_clone/features/user/view/moderation_screen.dart'
 import 'package:flutter_bluesky_clone/features/user/view/profile_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/settings_screen.dart';
 import 'package:flutter_bluesky_clone/router/scaffold_with_bottom_nav_bar.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final rootNavigatorKey = Provider((ref) => GlobalKey<NavigatorState>());
-final shellNavigatorKey = Provider((ref) => GlobalKey<NavigatorState>());
+part 'router.g.dart';
 
-final routerProvider = Provider(
-  (ref) {
-    return GoRouter(
-      navigatorKey: ref.watch(rootNavigatorKey),
-      initialLocation: WelcomeScreen.routePath,
-      routes: [
-        GoRoute(
-          path: WelcomeScreen.routePath,
-          pageBuilder: (context, state) =>
-              const NoTransitionPage(child: WelcomeScreen()),
-          routes: [
-            GoRoute(
-              path: HostingSignUpScreen.routePath,
-              pageBuilder: (context, state) =>
-                  const NoTransitionPage(child: HostingSignUpScreen()),
-              routes: [
-                GoRoute(
-                  path: SignUpScreen.routePath,
-                  pageBuilder: (context, state) =>
-                      const NoTransitionPage(child: SignUpScreen()),
-                  routes: [
-                    GoRoute(
-                      path: HandleNameEntryScreen.routePath,
-                      pageBuilder: (context, state) => const NoTransitionPage(
-                        child: HandleNameEntryScreen(),
-                      ),
+@riverpod
+GlobalKey<NavigatorState> rootNavigatorKey(RootNavigatorKeyRef ref) {
+  return GlobalKey<NavigatorState>();
+}
+
+@riverpod
+GlobalKey<NavigatorState> shellNavigatorKey(RootNavigatorKeyRef ref) {
+  return GlobalKey<NavigatorState>();
+}
+
+@riverpod
+GoRouter router(RouterRef ref) {
+  return GoRouter(
+    navigatorKey: ref.watch(rootNavigatorKeyProvider),
+    initialLocation: WelcomeScreen.routePath,
+    routes: [
+      GoRoute(
+        path: WelcomeScreen.routePath,
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: WelcomeScreen()),
+        routes: [
+          GoRoute(
+            path: HostingSignUpScreen.routePath,
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: HostingSignUpScreen()),
+            routes: [
+              GoRoute(
+                path: SignUpScreen.routePath,
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: SignUpScreen()),
+                routes: [
+                  GoRoute(
+                    path: HandleNameEntryScreen.routePath,
+                    pageBuilder: (context, state) => const NoTransitionPage(
+                      child: HandleNameEntryScreen(),
                     ),
-                  ],
-                ),
-              ],
-            ),
-            GoRoute(
-              path: SignInScreen.routePath,
-              pageBuilder: (context, state) =>
-                  const NoTransitionPage(child: SignInScreen()),
-              routes: [
-                GoRoute(
-                  path: SignInFormScreen.routePath,
-                  pageBuilder: (context, state) =>
-                      const NoTransitionPage(child: SignInFormScreen()),
-                ),
-              ],
-            ),
-          ],
-        ),
-        ShellRoute(
-          navigatorKey: ref.watch(shellNavigatorKey),
-          builder: (context, state, child) => ScaffoldWithBottomNavBar(
-            child: child,
+                  ),
+                ],
+              ),
+            ],
           ),
-          routes: [
-            GoRoute(
-              path: HomeScreen.routePath,
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: HomeScreen(),
+          GoRoute(
+            path: SignInScreen.routePath,
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: SignInScreen()),
+            routes: [
+              GoRoute(
+                path: SignInFormScreen.routePath,
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: SignInFormScreen()),
               ),
-            ),
-            GoRoute(
-              path: SearchScreen.routePath,
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: SearchScreen(),
-              ),
-            ),
-            GoRoute(
-              path: NotificationScreen.routePath,
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: NotificationScreen(),
-              ),
-            ),
-            GoRoute(
-              path: ProfileScreen.routePath,
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: ProfileScreen(),
-              ),
-              routes: [
-                GoRoute(
-                  path: EditProfileScreen.routePath,
-                  pageBuilder: (context, state) =>
-                      const NoTransitionPage(child: EditProfileScreen()),
-                ),
-              ],
-            ),
-          ],
-        ),
-        GoRoute(
-          path: ComposePostScreen.routePath,
-          pageBuilder: (context, state) => const MaterialPage(
-            fullscreenDialog: true,
-            child: ComposePostScreen(),
+            ],
           ),
+        ],
+      ),
+      ShellRoute(
+        navigatorKey: ref.watch(shellNavigatorKeyProvider),
+        builder: (context, state, child) => ScaffoldWithBottomNavBar(
+          child: child,
         ),
-        GoRoute(
-          path: ModerationScreen.routePath,
-          builder: (context, state) => const ModerationScreen(),
+        routes: [
+          GoRoute(
+            path: HomeScreen.routePath,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: HomeScreen(),
+            ),
+          ),
+          GoRoute(
+            path: SearchScreen.routePath,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: SearchScreen(),
+            ),
+          ),
+          GoRoute(
+            path: NotificationScreen.routePath,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: NotificationScreen(),
+            ),
+          ),
+          GoRoute(
+            path: ProfileScreen.routePath,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ProfileScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: EditProfileScreen.routePath,
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: EditProfileScreen()),
+              ),
+            ],
+          ),
+        ],
+      ),
+      GoRoute(
+        path: ComposePostScreen.routePath,
+        pageBuilder: (context, state) => const MaterialPage(
+          fullscreenDialog: true,
+          child: ComposePostScreen(),
         ),
-        GoRoute(
-          path: SettingsScreen.routePath,
-          builder: (context, state) => const SettingsScreen(),
-        ),
-      ],
-    );
-  },
-);
+      ),
+      GoRoute(
+        path: ModerationScreen.routePath,
+        builder: (context, state) => const ModerationScreen(),
+      ),
+      GoRoute(
+        path: SettingsScreen.routePath,
+        builder: (context, state) => const SettingsScreen(),
+      ),
+    ],
+  );
+}
