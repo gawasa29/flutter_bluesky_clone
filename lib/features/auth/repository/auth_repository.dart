@@ -34,6 +34,12 @@ class AuthRepository {
 
   String getPassword() => sharedPreferences.getString(passwordKey) ?? '';
 
+  void removeService() => sharedPreferences.remove(serviceKey);
+
+  void removeId() => sharedPreferences.remove(idKey);
+
+  void removePassword() => sharedPreferences.remove(passwordKey);
+
   Future<void> createSession({
     required String service,
     required String id,

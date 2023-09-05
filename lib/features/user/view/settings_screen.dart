@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
+import 'package:flutter_bluesky_clone/features/auth/view/sign_in_form_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
   static const routePath = '/Settings';
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   final _selectedFruits = [true, false, false];
 
   bool vertical = false;
@@ -73,7 +75,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               trailing: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  ref.read(authProvider.notifier).signOut();
+                },
                 child: const Text('Sign out'),
               ),
             ),

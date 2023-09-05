@@ -4,6 +4,7 @@ import 'package:flutter_bluesky_clone/common/error/error.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/common/widgets/error_banner.dart';
 import 'package:flutter_bluesky_clone/features/auth/repository/auth_repository.dart';
+import 'package:flutter_bluesky_clone/features/auth/view/welcome_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_navigation_button.dart';
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:flutter_bluesky_clone/router/router.dart';
@@ -13,7 +14,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'sign_in_form_screen.g.dart';
 
 @riverpod
-class Session extends _$Session {
+class Auth extends _$Auth {
   @override
   FutureOr<void> build() {}
 
@@ -56,6 +57,19 @@ class Session extends _$Session {
       state = AsyncError(errorMessage, stackTrace);
     }
   }
+
+  void signOut() {
+    state = const AsyncLoading();
+    ref.read(authRepositoryProvider)
+      ..removeService()
+      ..removeId()
+      ..removePassword();
+    state = const AsyncData(null);
+
+    if (state.hasError == false) {
+      ref.read(routerProvider).go(WelcomeScreen.routePath);
+    }
+  }
 }
 
 class SignInFormScreen extends ConsumerStatefulWidget {
@@ -88,7 +102,7 @@ class _SignInFormScreenState extends ConsumerState<SignInFormScreen> {
     final theme = Theme.of(context);
     final typography = theme.textTheme;
 
-    final session = ref.watch(sessionProvider);
+    final session = ref.watch(authProvider);
 
     return CustomScaffold(
       body: SafeArea(
@@ -147,7 +161,7 @@ class _SignInFormScreenState extends ConsumerState<SignInFormScreen> {
                   ),
                   CustomNavigationButton(
                     onPressed: () async {
-                      final sessionSignIn = ref.read(sessionProvider.notifier);
+                      final sessionSignIn = ref.read(authProvider.notifier);
                       var service = _serviceController.text.trim();
                       var id = _usernameController.text.trim();
                       final password = _passwordController.text.trim();
