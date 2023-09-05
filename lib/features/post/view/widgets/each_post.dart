@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_info.dart';
-import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 
 class EachPost extends StatelessWidget {
   const EachPost({super.key});
@@ -16,7 +15,7 @@ class EachPost extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(width: 10),
-            const UserPic(radius: 25),
+            // const UserPic(radius: 25),
             const SizedBox(width: 10),
             Expanded(
               child: Column(

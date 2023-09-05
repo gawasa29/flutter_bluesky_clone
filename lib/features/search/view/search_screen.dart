@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_drawer.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_info.dart';
-import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchScreen extends ConsumerWidget {
@@ -42,25 +41,26 @@ class SearchScreen extends ConsumerWidget {
             ),
           ),
           bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Text(
-                      'In Your Network',
-                      style: typography.titleLarge!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+            preferredSize: const Size.fromHeight(5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    'In Your Network',
+                    style: typography.titleLarge!.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Container(
-                    height: 1,
-                    color: colors.secondary,
-                  ),
-                ],
-              )),
+                ),
+                Container(
+                  height: 1,
+                  color: colors.secondary,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
       body: ListView.separated(
@@ -89,7 +89,7 @@ class EachUser extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(width: 10),
-            const UserPic(radius: 20),
+            // const UserPic(radius: 20),
             const SizedBox(width: 20),
             Expanded(
               child: Column(

@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 
 class UserPic extends StatelessWidget {
-  const UserPic({required this.radius, super.key});
+  const UserPic({required this.radius, required this.avatar, super.key});
 
   final double radius;
+  final String? avatar;
 
   @override
   Widget build(BuildContext context) {
+    if (avatar == null) {
+      return CircleAvatar(
+        radius: radius,
+        backgroundImage: const AssetImage('assets/images/profile.png'),
+      );
+    }
     return CircleAvatar(
       radius: radius,
-      backgroundImage: const NetworkImage(
-        'https://images.unsplash.com/photo-1491349174775-aaafddd81942?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-      ),
+      backgroundImage: NetworkImage(avatar!),
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/features/user/view/moderation_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/settings_screen.dart';
-import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -22,7 +21,7 @@ class CustomDrawer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const UserPic(radius: 40),
+                  // const UserPic(radius: 40),
                   const SizedBox(height: 5),
                   Text(
                     'GAWASA',

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/sign_in_form_screen.dart';
-import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -66,7 +65,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             const SizedBox(height: 10),
             ListTile(
               tileColor: colors.background,
-              leading: const UserPic(radius: 19),
+              // leading: const UserPic(radius: 19),
               title: const Text('User Name'),
               subtitle: Text(
                 '@HandleName',

@@ -98,9 +98,13 @@ class ProfileScreen extends ConsumerWidget {
                                     ),
                                   ],
                                 ),
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 110, left: 10),
-                                  child: UserPic(radius: 40),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 110, left: 10),
+                                  child: UserPic(
+                                    radius: 40,
+                                    avatar: profile.avatar,
+                                  ),
                                 ),
                               ],
                             ),

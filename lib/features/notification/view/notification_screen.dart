@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_drawer.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_info.dart';
-import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -69,7 +68,7 @@ class EachNotification extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const UserPic(radius: 20),
+                        // const UserPic(radius: 20),
                         Row(
                           children: [
                             const UserInfo(),

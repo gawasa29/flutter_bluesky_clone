@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
-import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:go_router/go_router.dart';
 
 class ComposePostScreen extends StatefulWidget {
@@ -50,10 +49,10 @@ class _ComposePostScreenState extends State<ComposePostScreen> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(8),
-                  child: UserPic(radius: 35),
-                ),
+                // const Padding(
+                //   padding: EdgeInsets.all(8),
+                //   child: UserPic(radius: 35),
+                // ),
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20),
@@ -62,7 +61,7 @@ class _ComposePostScreenState extends State<ComposePostScreen> {
                       minLines: 1,
                       maxLines: null,
                       inputFormatters: [
-                        LengthLimitingTextInputFormatter(maxCharacters)
+                        LengthLimitingTextInputFormatter(maxCharacters),
                       ],
                       decoration: const InputDecoration(
                         border: InputBorder.none,
