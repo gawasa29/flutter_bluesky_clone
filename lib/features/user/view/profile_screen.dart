@@ -1,12 +1,26 @@
+import 'package:bluesky/bluesky.dart' as bsky;
+import 'package:bluesky/bluesky.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/common/blue_sky_cash.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/post/view/compose_post_screen.dart';
 import 'package:flutter_bluesky_clone/features/post/view/widgets/each_post.dart';
+import 'package:flutter_bluesky_clone/features/user/repository/user_repository.dart';
 import 'package:flutter_bluesky_clone/features/user/view/edit_profile_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/background_pic.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'profile_screen.g.dart';
+
+@riverpod
+Future<bsky.ActorProfile> fetchProfile(FetchProfileRef ref) {
+  final did = BlueSkyCash.delegatePackingProperty!.data.did;
+
+  return ref.watch(userRepositoryProvider).getProfile(did);
+}
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -16,69 +30,86 @@ class ProfileScreen extends ConsumerWidget {
     print('📱 build ProfileScreen ');
     final theme = Theme.of(context);
     final typography = theme.textTheme;
+
+    final profile = ref.watch(fetchProfileProvider);
+
     return CustomScaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              pinned: true,
-              expandedHeight: 360,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Column(
-                  children: [
-                    Stack(
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const BackgroundPic(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
+      body: profile.when(
+        error: (error, stackTrace) => Text('Error $error'),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        data: (profile) {
+          return SafeArea(
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  pinned: true,
+                  expandedHeight: 360,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Column(
+                      children: [
+                        Stack(
+                          children: <Widget>[
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    context.go(EditProfileScreen.routeFullPath);
-                                  },
-                                  child: Text(
-                                    'Edit Profile',
-                                    style: typography.bodySmall!.copyWith(
-                                      fontWeight: FontWeight.bold,
+                                const BackgroundPic(),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        context.go(
+                                          EditProfileScreen.routeFullPath,
+                                        );
+                                      },
+                                      child: Text(
+                                        'Edit Profile',
+                                        style: typography.bodySmall!.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
+                                    const SizedBox(width: 10),
+                                    const ProfilePopUpMenuButton(),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: ProfileUserInfo(
+                                    handle: profile.handle,
+                                    displayName: profile.displayName,
+                                    followersCount: profile.followersCount,
+                                    followsCount: profile.followsCount,
+                                    postsCount: profile.postsCount,
                                   ),
                                 ),
-                                const SizedBox(width: 10),
-                                const ProfilePopUpMenuButton(),
                               ],
                             ),
                             const Padding(
-                              padding: EdgeInsets.only(left: 10),
-                              child: ProfileUserInfo(),
+                              padding: EdgeInsets.only(top: 110, left: 10),
+                              child: UserPic(radius: 40),
                             ),
                           ],
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 110, left: 10),
-                          child: UserPic(radius: 40),
-                        )
                       ],
                     ),
-                  ],
+                  ),
+                  bottom: const PreferredSize(
+                    preferredSize: Size.fromHeight(5),
+                    child: ProfileTabBar(),
+                  ),
                 ),
-              ),
-              bottom: const PreferredSize(
-                preferredSize: Size.fromHeight(5),
-                child: ProfileTabBar(),
-              ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      return const EachPost();
+                    },
+                  ),
+                ),
+              ],
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return const EachPost();
-                },
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -127,24 +158,39 @@ class ProfilePopUpMenuButton extends StatelessWidget {
 }
 
 class ProfileUserInfo extends StatelessWidget {
-  const ProfileUserInfo({super.key});
+  const ProfileUserInfo({
+    required this.handle,
+    required this.displayName,
+    required this.followersCount,
+    required this.followsCount,
+    required this.postsCount,
+    super.key,
+  });
+
+  final String handle;
+  final String? displayName;
+
+  final int followersCount;
+  final int followsCount;
+  final int postsCount;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final typography = theme.textTheme;
     final colors = theme.colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'GAWASA',
+          displayName ?? handle,
           style: typography.headlineLarge!.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          '@gawasa.bsky.social',
+          handle,
           style: typography.titleMedium!.copyWith(
             color: colors.onSecondary,
           ),
@@ -152,7 +198,7 @@ class ProfileUserInfo extends StatelessWidget {
         Row(
           children: [
             Text(
-              '0',
+              followersCount.toString(),
               style: typography.titleMedium!.copyWith(
                 color: colors.onSecondary,
                 fontWeight: FontWeight.bold,
@@ -160,14 +206,14 @@ class ProfileUserInfo extends StatelessWidget {
             ),
             const SizedBox(width: 1),
             Text(
-              'follower',
+              'followers',
               style: typography.titleMedium!.copyWith(
                 color: colors.onSecondary,
               ),
             ),
             const SizedBox(width: 5),
             Text(
-              '0',
+              followsCount.toString(),
               style: typography.titleMedium!.copyWith(
                 color: colors.onSecondary,
                 fontWeight: FontWeight.bold,
@@ -175,14 +221,14 @@ class ProfileUserInfo extends StatelessWidget {
             ),
             const SizedBox(width: 1),
             Text(
-              'follower',
+              'following',
               style: typography.titleMedium!.copyWith(
                 color: colors.onSecondary,
               ),
             ),
             const SizedBox(width: 5),
             Text(
-              '0',
+              postsCount.toString(),
               style: typography.titleMedium!.copyWith(
                 color: colors.onSecondary,
                 fontWeight: FontWeight.bold,

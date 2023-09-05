@@ -17,7 +17,7 @@ class AuthRepository {
   static const passwordKey = 'password';
 
   Future<void> setService(String service) async {
-    await sharedPreferences.setString(idKey, service);
+    await sharedPreferences.setString(serviceKey, service);
   }
 
   Future<void> setId(String id) async {
