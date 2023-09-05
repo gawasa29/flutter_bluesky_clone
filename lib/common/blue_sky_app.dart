@@ -2,15 +2,16 @@ import 'package:bluesky/bluesky.dart';
 import 'package:flutter_bluesky_clone/features/auth/repository/auth_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class BlueSkyCash {
-  BlueSkyCash._();
+class BlueSkyApp {
+  BlueSkyApp._();
+
+  static XRPCResponse<Session>? session;
+
   static Bluesky get instance {
-    final defaultAppInstance = delegatePackingProperty!.data;
+    final sessionInstance = session!.data;
 
-    return Bluesky.fromSession(defaultAppInstance);
+    return Bluesky.fromSession(sessionInstance);
   }
-
-  static XRPCResponse<Session>? delegatePackingProperty;
 
   static Future<void> initializeApp() async {
     final prefs = await SharedPreferences.getInstance();
@@ -24,7 +25,7 @@ class BlueSkyCash {
       return;
     }
 
-    delegatePackingProperty = await createSession(
+    session = await createSession(
       service: service,
       identifier: id,
       password: password,

@@ -1,12 +1,12 @@
 import 'package:bluesky/bluesky.dart' as bsky;
-import 'package:flutter_bluesky_clone/common/blue_sky_cash.dart';
+import 'package:flutter_bluesky_clone/common/blue_sky_app.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_repository.g.dart';
 
 @riverpod
 UserRepository userRepository(UserRepositoryRef ref) {
-  return UserRepository(BlueSkyCash.instance);
+  return UserRepository(BlueSkyApp.instance);
 }
 
 class UserRepository {

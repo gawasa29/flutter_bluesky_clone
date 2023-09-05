@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bluesky_clone/common/blue_sky_cash.dart';
+import 'package:flutter_bluesky_clone/common/blue_sky_app.dart';
 import 'package:flutter_bluesky_clone/features/auth/repository/auth_repository.dart';
 import 'package:flutter_bluesky_clone/router/router.dart';
 import 'package:flutter_bluesky_clone/theme/theme.dart';
@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await BlueSkyCash.initializeApp();
+  await BlueSkyApp.initializeApp();
 
   final sharedPreferences = await SharedPreferences.getInstance();
 
