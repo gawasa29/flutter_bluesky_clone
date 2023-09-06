@@ -35,5 +35,19 @@ final fetchFeedsProvider = AutoDisposeFutureProvider<List<FeedView>>.internal(
 );
 
 typedef FetchFeedsRef = AutoDisposeFutureProviderRef<List<FeedView>>;
+String _$postHash() => r'c5d811c8563e189d31c5c89b579fda323a6886be';
+
+/// See also [Post].
+@ProviderFor(Post)
+final postProvider = AutoDisposeAsyncNotifierProvider<Post, void>.internal(
+  Post.new,
+  name: r'postProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$postHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Post = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

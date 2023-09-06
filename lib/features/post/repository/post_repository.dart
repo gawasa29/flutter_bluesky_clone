@@ -1,5 +1,6 @@
 import 'package:bluesky/bluesky.dart';
 import 'package:flutter_bluesky_clone/common/blue_sky_app.dart';
+import 'package:flutter_bluesky_clone/router/router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'post_repository.g.dart';
@@ -7,6 +8,10 @@ part 'post_repository.g.dart';
 class PostRepository {
   PostRepository(this._bluesky);
   final Bluesky _bluesky;
+
+  Future<void> createPostRepo({required String text}) async {
+    await _bluesky.feeds.createPost(text: text);
+  }
 
   Future<Feed> getFeed({String? cursor}) async {
     final response =
@@ -28,4 +33,19 @@ Future<List<FeedView>> fetchFeeds(FetchFeedsRef ref) async {
   final feedViewList = feeds.feed;
 
   return feedViewList;
+}
+
+@riverpod
+class Post extends _$Post {
+  @override
+  FutureOr<void> build() {}
+
+  Future<void> createPost({required String text}) async {
+    state = await AsyncValue.guard(() async {
+      await ref.read(postRepositoryProvider).createPostRepo(text: text);
+    });
+    if (state.hasError == false) {
+      ref.read(routerProvider).pop();
+    }
+  }
 }
