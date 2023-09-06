@@ -21,7 +21,6 @@ class ProfileScreen extends ConsumerWidget {
     final typography = theme.textTheme;
 
     final profile = ref.watch(fetchProfileProvider);
-    final feeds = ref.watch(fetchUserFeedsProvider);
 
     return CustomScaffold(
       body: SafeArea(
