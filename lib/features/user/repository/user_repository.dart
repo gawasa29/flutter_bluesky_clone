@@ -12,6 +12,11 @@ class UserRepository {
     final response = await _bluesky.actors.findProfile(actor: did);
     return response.data;
   }
+
+  Future<Feed> getUserFeeds(String did) async {
+    final response = await _bluesky.feeds.findFeed(actor: did, limit: 100);
+    return response.data;
+  }
 }
 
 @riverpod
@@ -24,4 +29,15 @@ Future<ActorProfile> fetchProfile(FetchProfileRef ref) {
   final did = BlueSkyApp.session!.data.did;
 
   return ref.watch(userRepositoryProvider).getProfile(did);
+}
+
+@riverpod
+Future<List<FeedView>> fetchUserFeeds(FetchUserFeedsRef ref) async {
+  final did = BlueSkyApp.session!.data.did;
+
+  final feeds = await ref.watch(userRepositoryProvider).getUserFeeds(did);
+
+  final feedViewList = feeds.feed;
+
+  return feedViewList;
 }

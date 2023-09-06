@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/util/calculate_height.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/post/view/compose_post_screen.dart';
+import 'package:flutter_bluesky_clone/features/post/view/widgets/each_post.dart';
 import 'package:flutter_bluesky_clone/features/user/repository/user_repository.dart';
 import 'package:flutter_bluesky_clone/features/user/view/edit_profile_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/background_pic.dart';
@@ -20,6 +21,7 @@ class ProfileScreen extends ConsumerWidget {
     final typography = theme.textTheme;
 
     final profile = ref.watch(fetchProfileProvider);
+    final feeds = ref.watch(fetchUserFeedsProvider);
 
     return CustomScaffold(
       body: SafeArea(
@@ -106,11 +108,37 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                   ];
                 },
-                body: const DefaultTabController(
-                  length: 0,
-                  child: TabBarView(
-                    children: [],
-                  ),
+                body: ListView.builder(
+                  itemBuilder: (context, index) {
+                    final feed = ref.watch(fetchUserFeedsProvider);
+
+                    return feed.when(
+                      error: (error, stackTrace) => Text('Error $error'),
+                      loading: () =>
+                          const Center(child: CircularProgressIndicator()),
+                      data: (feeds) {
+                        if (index >= feeds.length) return null;
+
+                        print('feeds: ${feeds.length}');
+
+                        final feed = feeds[index];
+                        final post = feed.post;
+                        final recode = post.record;
+                        final author = post.author;
+
+                        return EachPost(
+                          replyCount: post.replyCount,
+                          repostCount: post.repostCount,
+                          likeCount: post.likeCount,
+                          text: recode.text,
+                          createdAt: recode.createdAt,
+                          handle: author.handle,
+                          displayName: author.displayName,
+                          avatar: author.avatar,
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
             );

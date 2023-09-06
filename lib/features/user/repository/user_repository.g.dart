@@ -35,5 +35,21 @@ final fetchProfileProvider = AutoDisposeFutureProvider<ActorProfile>.internal(
 );
 
 typedef FetchProfileRef = AutoDisposeFutureProviderRef<ActorProfile>;
+String _$fetchUserFeedsHash() => r'789216999f838dc4f9d1cf4bec5bd85c2872ea75';
+
+/// See also [fetchUserFeeds].
+@ProviderFor(fetchUserFeeds)
+final fetchUserFeedsProvider =
+    AutoDisposeFutureProvider<List<FeedView>>.internal(
+  fetchUserFeeds,
+  name: r'fetchUserFeedsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$fetchUserFeedsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef FetchUserFeedsRef = AutoDisposeFutureProviderRef<List<FeedView>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
