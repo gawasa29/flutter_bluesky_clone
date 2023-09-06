@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_drawer.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
-import 'package:flutter_bluesky_clone/features/user/view/widgets/user_info.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchScreen extends ConsumerWidget {
@@ -97,7 +96,7 @@ class EachUser extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const UserInfo(),
+                      // const UserInfo(),
                       Expanded(child: Container()),
                       ElevatedButton(
                         onPressed: () {},

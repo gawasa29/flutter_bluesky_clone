@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_drawer.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
-import 'package:flutter_bluesky_clone/features/user/view/widgets/user_info.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -71,7 +70,7 @@ class EachNotification extends StatelessWidget {
                         // const UserPic(radius: 20),
                         Row(
                           children: [
-                            const UserInfo(),
+                            // const UserInfo(),
                             const SizedBox(width: 5),
                             Text(
                               'liked your post',

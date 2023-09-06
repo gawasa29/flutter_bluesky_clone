@@ -1,21 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluesky_clone/common/util/date_time.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_info.dart';
+import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 
 class EachPost extends StatelessWidget {
-  const EachPost({super.key});
+  const EachPost({
+    required this.replyCount,
+    required this.repostCount,
+    required this.likeCount,
+    required this.text,
+    required this.createdAt,
+    required this.handle,
+    required this.displayName,
+    required this.avatar,
+    super.key,
+  });
+  final int replyCount;
+  final int repostCount;
+  final int likeCount;
+
+  final String text;
+  final DateTime createdAt;
+
+  final String handle;
+  final String? displayName;
+  final String? avatar;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final typography = theme.textTheme;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(width: 10),
-            // const UserPic(radius: 25),
+            UserPic(
+              radius: 25,
+              avatar: avatar,
+            ),
             const SizedBox(width: 10),
             Expanded(
               child: Column(
@@ -23,24 +49,24 @@ class EachPost extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const UserInfo(),
-                      Expanded(child: Container()),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Follow',
-                          style: typography.bodySmall!.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                      UserInfo(
+                        handle: handle,
+                        displayName: displayName,
                       ),
+                      const Text('・'),
+                      Text(humanReadableDateTimeString(createdAt)),
+                      const SizedBox(width: 30),
                     ],
                   ),
                   Text(
-                    'Posts will appear here.',
+                    text,
                     style: typography.bodyLarge!.copyWith(),
                   ),
-                  const ActionIcons(),
+                  ActionIcons(
+                    replyCount: replyCount,
+                    repostCount: repostCount,
+                    likeCount: likeCount,
+                  ),
                 ],
               ),
             ),
@@ -53,7 +79,16 @@ class EachPost extends StatelessWidget {
 }
 
 class ActionIcons extends StatelessWidget {
-  const ActionIcons({super.key});
+  const ActionIcons({
+    required this.replyCount,
+    required this.repostCount,
+    required this.likeCount,
+    super.key,
+  });
+
+  final int replyCount;
+  final int repostCount;
+  final int likeCount;
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +99,10 @@ class ActionIcons extends StatelessWidget {
           onTap: () {
             print('Tap Reply');
           },
-          child: const Row(
+          child: Row(
             children: [
-              Icon(Icons.chat_bubble_outline),
-              Text('0'),
+              const Icon(Icons.chat_bubble_outline),
+              Text(replyCount.toString()),
             ],
           ),
         ),
@@ -75,10 +110,10 @@ class ActionIcons extends StatelessWidget {
           onTap: () {
             print('Tap Retweet');
           },
-          child: const Row(
+          child: Row(
             children: [
-              Icon(Icons.repeat),
-              Text('0'),
+              const Icon(Icons.repeat),
+              Text(repostCount.toString()),
             ],
           ),
         ),
@@ -86,10 +121,10 @@ class ActionIcons extends StatelessWidget {
           onTap: () {
             print('Tap Like');
           },
-          child: const Row(
+          child: Row(
             children: [
-              Icon(Icons.favorite_border),
-              Text('0'),
+              const Icon(Icons.favorite_border),
+              Text(likeCount.toString()),
             ],
           ),
         ),

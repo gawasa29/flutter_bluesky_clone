@@ -16,12 +16,15 @@ dependencies:
   ###  State Management  ###
   flutter_riverpod: any
   riverpod_annotation: any
+  freezed_annotation: any
+  json_serializable: any
 
   ###  Routing  ###
   go_router: any
 
   ###  DB  ###
   shared_preferences: any
+  intl: any
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +34,7 @@ dev_dependencies:
   riverpod_lint: any
   riverpod_generator: any
   build_runner: any
+  freezed: any
 
 flutter:
   uses-material-design: true

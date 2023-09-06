@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_drawer.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
+import 'package:flutter_bluesky_clone/features/post/repository/post_repository.dart';
 import 'package:flutter_bluesky_clone/features/post/view/compose_post_screen.dart';
 import 'package:flutter_bluesky_clone/features/post/view/widgets/each_post.dart';
 import 'package:flutter_bluesky_clone/router/scaffold_with_bottom_nav_bar.dart';
@@ -16,6 +17,7 @@ class HomeScreen extends ConsumerWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
+
     final scrollController = ScrollController();
     var lastScrollOffset = 0.0;
     scrollController.addListener(() {
@@ -26,38 +28,70 @@ class HomeScreen extends ConsumerWidget {
       }
       lastScrollOffset = scrollController.offset;
     });
+
     return CustomScaffold(
       drawer: const CustomDrawer(),
-      body: CustomScrollView(
-        controller: scrollController,
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 80,
-            floating: true,
-            snap: true,
-            title: Text(
-              'Bluesky',
-              style: typography.titleLarge!.copyWith(
-                color: colors.primary,
-                fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: NestedScrollView(
+          controller: scrollController,
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                expandedHeight: 80,
+                floating: true,
+                snap: true,
+                title: Text(
+                  'Bluesky',
+                  style: typography.titleLarge!.copyWith(
+                    color: colors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                actions: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.settings),
+                  ),
+                ],
+                bottom: const PreferredSize(
+                  preferredSize: Size.fromHeight(5),
+                  child: HomeTabBar(),
+                ),
               ),
-            ),
-            actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
-            ],
-            bottom: const PreferredSize(
-              preferredSize: Size.fromHeight(5),
-              child: HomeTabBar(),
-            ),
+            ];
+          },
+          body: ListView.builder(
+            itemBuilder: (context, index) {
+              final feed = ref.watch(fetchFeedsProvider);
+
+              return feed.when(
+                error: (error, stackTrace) => Text('Error $error'),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                data: (feeds) {
+                  if (index >= feeds.length) return null;
+
+                  print('feeds: ${feeds.length}');
+
+                  final feed = feeds[index];
+                  final post = feed.post;
+                  final recode = post.record;
+                  final author = post.author;
+
+                  return EachPost(
+                    replyCount: post.replyCount,
+                    repostCount: post.repostCount,
+                    likeCount: post.likeCount,
+                    text: recode.text,
+                    createdAt: recode.createdAt,
+                    handle: author.handle,
+                    displayName: author.displayName,
+                    avatar: author.avatar,
+                  );
+                },
+              );
+            },
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return const EachPost();
-              },
-            ),
-          ),
-        ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
