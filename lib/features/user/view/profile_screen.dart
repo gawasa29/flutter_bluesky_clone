@@ -53,60 +53,61 @@ class ProfileScreen extends ConsumerWidget {
                         textStyle: typography.bodyLarge!,
                       ),
                       flexibleSpace: FlexibleSpaceBar(
-                        background: Column(
+                        background: Stack(
                           children: [
-                            Stack(
-                              children: <Widget>[
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                BackgroundPic(banner: profile.banner),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    BackgroundPic(banner: profile.banner),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            context.go(
-                                              EditProfileScreen.routeFullPath,
-                                            );
-                                          },
-                                          child: Text(
-                                            'Edit Profile',
-                                            style:
-                                                typography.bodySmall!.copyWith(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        context.go(
+                                          EditProfileScreen.routeFullPath,
+                                        );
+                                      },
+                                      child: Text(
+                                        'Edit Profile',
+                                        style: typography.bodySmall!.copyWith(
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        const SizedBox(width: 10),
-                                        const ProfilePopUpMenuButton(),
-                                      ],
+                                      ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: ProfileUserInfo(
+                                    const SizedBox(width: 10),
+                                    const ProfilePopUpMenuButton(),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Column(
+                                    children: [
+                                      ProfileUserInfo(
                                         handle: profile.handle,
                                         displayName: profile.displayName,
+                                      ),
+                                      FollowInfo(
                                         followersCount: profile.followersCount,
                                         followsCount: profile.followsCount,
                                         postsCount: profile.postsCount,
                                       ),
-                                    ),
-                                    Text(
-                                      profile.description ?? '',
-                                      maxLines: 30,
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 110, left: 10),
-                                  child: UserPic(
-                                    radius: 40,
-                                    avatar: profile.avatar,
+                                      Text(
+                                        profile.description ?? '',
+                                        maxLines: 30,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 110, left: 10),
+                              child: UserPic(
+                                radius: 40,
+                                avatar: profile.avatar,
+                              ),
                             ),
                           ],
                         ),
@@ -184,24 +185,17 @@ class ProfileUserInfo extends StatelessWidget {
   const ProfileUserInfo({
     required this.handle,
     required this.displayName,
-    required this.followersCount,
-    required this.followsCount,
-    required this.postsCount,
     super.key,
   });
 
   final String handle;
   final String? displayName;
 
-  final int followersCount;
-  final int followsCount;
-  final int postsCount;
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final typography = theme.textTheme;
     final colors = theme.colorScheme;
+    final typography = theme.textTheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,6 +204,7 @@ class ProfileUserInfo extends StatelessWidget {
           displayName ?? handle,
           style: typography.headlineLarge!.copyWith(
             fontWeight: FontWeight.bold,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
         Text(
@@ -218,53 +213,74 @@ class ProfileUserInfo extends StatelessWidget {
             color: colors.onSecondary,
           ),
         ),
-        Row(
-          children: [
-            Text(
-              followersCount.toString(),
-              style: typography.titleMedium!.copyWith(
-                color: colors.onSecondary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(width: 1),
-            Text(
-              'followers',
-              style: typography.titleMedium!.copyWith(
-                color: colors.onSecondary,
-              ),
-            ),
-            const SizedBox(width: 5),
-            Text(
-              followsCount.toString(),
-              style: typography.titleMedium!.copyWith(
-                color: colors.onSecondary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(width: 1),
-            Text(
-              'following',
-              style: typography.titleMedium!.copyWith(
-                color: colors.onSecondary,
-              ),
-            ),
-            const SizedBox(width: 5),
-            Text(
-              postsCount.toString(),
-              style: typography.titleMedium!.copyWith(
-                color: colors.onSecondary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(width: 1),
-            Text(
-              'posts',
-              style: typography.titleMedium!.copyWith(
-                color: colors.onSecondary,
-              ),
-            ),
-          ],
+      ],
+    );
+  }
+}
+
+class FollowInfo extends StatelessWidget {
+  const FollowInfo({
+    required this.followersCount,
+    required this.followsCount,
+    required this.postsCount,
+    super.key,
+  });
+
+  final int followersCount;
+  final int followsCount;
+  final int postsCount;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final typography = theme.textTheme;
+
+    return Row(
+      children: [
+        Text(
+          followersCount.toString(),
+          style: typography.titleMedium!.copyWith(
+            color: colors.onSecondary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(width: 1),
+        Text(
+          'followers',
+          style: typography.titleMedium!.copyWith(
+            color: colors.onSecondary,
+          ),
+        ),
+        const SizedBox(width: 5),
+        Text(
+          followsCount.toString(),
+          style: typography.titleMedium!.copyWith(
+            color: colors.onSecondary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(width: 1),
+        Text(
+          'following',
+          style: typography.titleMedium!.copyWith(
+            color: colors.onSecondary,
+          ),
+        ),
+        const SizedBox(width: 5),
+        Text(
+          postsCount.toString(),
+          style: typography.titleMedium!.copyWith(
+            color: colors.onSecondary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(width: 1),
+        Text(
+          'posts',
+          style: typography.titleMedium!.copyWith(
+            color: colors.onSecondary,
+          ),
         ),
       ],
     );
