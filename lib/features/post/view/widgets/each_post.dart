@@ -1,3 +1,4 @@
+import 'package:bluesky/bluesky.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/util/date_time.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_info.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 
 class EachPost extends StatelessWidget {
   const EachPost({
+    required this.reason,
     required this.replyCount,
     required this.repostCount,
     required this.likeCount,
@@ -15,6 +17,9 @@ class EachPost extends StatelessWidget {
     required this.avatar,
     super.key,
   });
+
+  final Reason? reason;
+
   final int replyCount;
   final int repostCount;
   final int likeCount;
@@ -34,6 +39,8 @@ class EachPost extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
+        //TODO If a better idea sparks a better idea, please someone fix it.
+        if (reason != null) RePostMark(reason: reason!),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -194,5 +201,37 @@ class ActionIcons extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class RePostMark extends StatelessWidget {
+  const RePostMark({required this.reason, super.key});
+
+  final Reason reason;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(width: 35),
+        const Icon(Icons.repeat),
+        const SizedBox(width: 10),
+        Flexible(
+          child: Text('Reposted by @${extractHandle(reason.data.toString())}'),
+        ),
+      ],
+    );
+  }
+}
+
+String extractHandle(String text) {
+  final regExp = RegExp('handle: (.*?),');
+  final Match? match = regExp.firstMatch(text);
+
+  if (match != null) {
+    return match.group(1)!;
+  } else {
+    return 'No handle was found.';
   }
 }

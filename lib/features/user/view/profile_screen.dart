@@ -121,11 +121,15 @@ class ProfileScreen extends ConsumerWidget {
                         print('feeds: ${feeds.length}');
 
                         final feed = feeds[index];
+
                         final post = feed.post;
+                        final reason = feed.reason;
+
                         final recode = post.record;
                         final author = post.author;
 
                         return EachPost(
+                          reason: reason,
                           replyCount: post.replyCount,
                           repostCount: post.repostCount,
                           likeCount: post.likeCount,
