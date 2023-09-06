@@ -1,4 +1,4 @@
-import 'package:bluesky/bluesky.dart' as bsky;
+import 'package:bluesky/bluesky.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,12 +40,12 @@ class AuthRepository {
 
   void removePassword() => sharedPreferences.remove(passwordKey);
 
-  Future<void> createSession({
+  Future<void> createSessionRepo({
     required String service,
     required String id,
     required String password,
   }) async {
-    await bsky.createSession(
+    await createSession(
       service: service,
       identifier: id,
       password: password,

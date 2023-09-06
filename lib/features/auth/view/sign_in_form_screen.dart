@@ -29,7 +29,7 @@ class Auth extends _$Auth {
 
       final authRepository = ref.watch(authRepositoryProvider);
 
-      await authRepository.createSession(
+      await authRepository.createSessionRepo(
         service: service,
         id: id,
         password: password,

@@ -1,7 +1,4 @@
-import 'package:bluesky/bluesky.dart' as bsky;
-import 'package:bluesky/bluesky.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bluesky_clone/common/blue_sky_app.dart';
 import 'package:flutter_bluesky_clone/common/util/calculate_height.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/post/view/compose_post_screen.dart';
@@ -11,16 +8,6 @@ import 'package:flutter_bluesky_clone/features/user/view/widgets/background_pic.
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'profile_screen.g.dart';
-
-@riverpod
-Future<bsky.ActorProfile> fetchProfile(FetchProfileRef ref) {
-  final did = BlueSkyApp.session!.data.did;
-
-  return ref.watch(userRepositoryProvider).getProfile(did);
-}
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});

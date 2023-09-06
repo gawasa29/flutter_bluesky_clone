@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
-import 'package:flutter_bluesky_clone/features/user/view/profile_screen.dart';
+import 'package:flutter_bluesky_clone/features/user/repository/user_repository.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/background_pic.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

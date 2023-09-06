@@ -6,7 +6,7 @@ part of 'sign_in_form_screen.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authHash() => r'862dcb9e7a2df1c4344a9c3c5bd1ce793c0c6c3c';
+String _$authHash() => r'3643b88d314bd13f65b9169a055a563c7e4cc190';
 
 /// See also [Auth].
 @ProviderFor(Auth)

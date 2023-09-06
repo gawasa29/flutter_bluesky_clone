@@ -21,5 +21,19 @@ final userRepositoryProvider = AutoDisposeProvider<UserRepository>.internal(
 );
 
 typedef UserRepositoryRef = AutoDisposeProviderRef<UserRepository>;
+String _$fetchProfileHash() => r'b23f54b232185bb003ab55be7cc0ffabf7bed713';
+
+/// See also [fetchProfile].
+@ProviderFor(fetchProfile)
+final fetchProfileProvider = AutoDisposeFutureProvider<ActorProfile>.internal(
+  fetchProfile,
+  name: r'fetchProfileProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$fetchProfileHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef FetchProfileRef = AutoDisposeFutureProviderRef<ActorProfile>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
