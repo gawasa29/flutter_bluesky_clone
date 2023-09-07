@@ -19,6 +19,12 @@ class PostRepository {
 
     return response.data;
   }
+
+  Future<PostThread> getFeeddd({required AtUri uri}) async {
+    final response = await _bluesky.feeds.findPostThread(uri: uri);
+
+    return response.data;
+  }
 }
 
 @riverpod
