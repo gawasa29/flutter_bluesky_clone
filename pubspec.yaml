@@ -24,20 +24,40 @@ dependencies:
 
   ###  DB  ###
   shared_preferences: any
-  intl: any
 
   ###  Icon  ###
   iconsax: any
 
+  ###  Util  ###
+  intl: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  ###  Lint  ###
   very_good_analysis: any
   custom_lint: any
   riverpod_lint: any
+
+  ###  Generator  ###
   riverpod_generator: any
   build_runner: any
   freezed: any
+
+  ###  Splash/App Icon  ###
+  flutter_launcher_icons: any
+  flutter_native_splash: any
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/bluesky.jpeg"
+
+flutter_native_splash:
+  background_image: "assets/images/bluesky.jpeg"
+  fullscreen: true
 
 flutter:
   uses-material-design: true
