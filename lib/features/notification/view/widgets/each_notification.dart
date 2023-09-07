@@ -57,12 +57,6 @@ class EachNotification extends ConsumerWidget {
                   radius: 20,
                   avatar: author.avatar,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    print('🐅 $reasonSubject');
-                  },
-                  child: const Text('reasonSubject'),
-                ),
                 RichText(
                   text: TextSpan(
                     children: [
