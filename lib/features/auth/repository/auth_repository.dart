@@ -1,5 +1,5 @@
 import 'package:bluesky/bluesky.dart';
-import 'package:flutter_bluesky_clone/common/blue_sky_app.dart';
+import 'package:flutter_bluesky_clone/blue_sky_app.dart';
 import 'package:flutter_bluesky_clone/common/error/error.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/welcome_screen.dart';
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';

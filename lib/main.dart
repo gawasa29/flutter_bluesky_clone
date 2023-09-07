@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bluesky_clone/common/blue_sky_app.dart';
+import 'package:flutter_bluesky_clone/blue_sky_app.dart';
 import 'package:flutter_bluesky_clone/features/auth/repository/auth_repository.dart';
 import 'package:flutter_bluesky_clone/router/router.dart';
 import 'package:flutter_bluesky_clone/theme/theme.dart';

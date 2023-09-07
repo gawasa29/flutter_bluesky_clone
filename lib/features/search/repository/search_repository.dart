@@ -1,5 +1,5 @@
 import 'package:bluesky/bluesky.dart';
-import 'package:flutter_bluesky_clone/common/blue_sky_app.dart';
+import 'package:flutter_bluesky_clone/blue_sky_app.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'search_repository.g.dart';

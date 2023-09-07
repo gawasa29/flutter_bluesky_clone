@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bluesky_clone/common/blue_sky_app.dart';
+import 'package:flutter_bluesky_clone/blue_sky_app.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/handle_name_entry_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/hosting_sign_up_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/sign_in_form_screen.dart';
