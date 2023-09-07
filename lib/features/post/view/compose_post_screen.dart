@@ -57,7 +57,7 @@ class _ComposePostScreenState extends ConsumerState<ComposePostScreen> {
                 ? null
                 : () {
                     ref
-                        .read(postProvider.notifier)
+                        .read(postCommandProvider.notifier)
                         .createPost(text: textController.text);
                   },
             child: const Text('Post'),

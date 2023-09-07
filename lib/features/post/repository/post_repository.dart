@@ -20,8 +20,8 @@ class PostRepository {
     return response.data;
   }
 
-  Future<PostThread> getFeeddd({required AtUri uri}) async {
-    final response = await _bluesky.feeds.findPostThread(uri: uri);
+  Future<Posts> getPosts({required AtUri uri}) async {
+    final response = await _bluesky.feeds.findPosts(uris: [uri]);
 
     return response.data;
   }
@@ -42,7 +42,19 @@ Future<List<FeedView>> fetchFeeds(FetchFeedsRef ref) async {
 }
 
 @riverpod
-class Post extends _$Post {
+Future<Post> fetchPost(
+  FetchPostRef ref, {
+  required AtUri uri,
+}) async {
+  final posts = await ref.watch(postRepositoryProvider).getPosts(uri: uri);
+
+  final post = posts.posts.first;
+
+  return post;
+}
+
+@riverpod
+class PostCommand extends _$PostCommand {
   @override
   FutureOr<void> build() {}
 

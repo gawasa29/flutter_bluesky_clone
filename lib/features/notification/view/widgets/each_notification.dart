@@ -1,15 +1,22 @@
 import 'package:bluesky/bluesky.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/util/date_time.dart';
+import 'package:flutter_bluesky_clone/features/post/repository/post_repository.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EachNotification extends StatelessWidget {
+class EachNotification extends ConsumerWidget {
   const EachNotification({
     required this.author,
     required this.reason,
     required this.indexedAt,
+    required this.reasonSubject,
+    required this.record,
     super.key,
   });
+
+  final AtUri? reasonSubject;
+  final Map<String, dynamic>? record;
 
   final Actor author;
 
@@ -18,10 +25,12 @@ class EachNotification extends StatelessWidget {
   final DateTime indexedAt;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
+
+    final post = ref.watch(fetchPostProvider(uri: reasonSubject!));
 
     return Padding(
       padding: const EdgeInsets.all(10),
@@ -47,6 +56,12 @@ class EachNotification extends StatelessWidget {
                 UserPic(
                   radius: 20,
                   avatar: author.avatar,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    print('🐅 $reasonSubject');
+                  },
+                  child: const Text('reasonSubject'),
                 ),
                 RichText(
                   text: TextSpan(
@@ -74,11 +89,17 @@ class EachNotification extends StatelessWidget {
                     style: typography.bodyMedium!.copyWith(),
                   ),
                 ),
-                Text(
-                  'Description will appear here.',
-                  style: typography.bodyLarge!.copyWith(
-                    color: colors.onSecondary,
-                  ),
+                post.when(
+                  error: (error, stackTrace) => Text('Error $error'),
+                  loading: SizedBox.new,
+                  data: (post) {
+                    return Text(
+                      post.record.text,
+                      style: typography.bodyLarge!.copyWith(
+                        color: colors.onSecondary,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

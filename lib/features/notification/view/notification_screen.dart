@@ -46,10 +46,14 @@ class NotificationScreen extends ConsumerWidget {
               final notification = notifications[index];
 
               final author = notification.author;
+              final reasonSubject = notification.reasonSubject;
+              final record = notification.record;
               final reason = notification.reason;
               final indexedAt = notification.indexedAt;
 
               return EachNotification(
+                reasonSubject: reasonSubject,
+                record: record,
                 author: author,
                 reason: reason,
                 indexedAt: indexedAt,
