@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/features/notification/view/notification_screen.dart';
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
 import 'package:flutter_bluesky_clone/features/search/view/search_screen.dart';
+import 'package:flutter_bluesky_clone/features/user/repository/user_repository.dart';
 import 'package:flutter_bluesky_clone/features/user/view/profile_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -24,26 +25,37 @@ class _ScaffoldWithBottomNavBarState
   int _navIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final avatar =
+        ref.watch(fetchProfileProvider.select((value) => value.value?.avatar));
+
     return Scaffold(
       bottomNavigationBar: ScrollToHideWidget(
         height: 100,
         isVisible: ref.watch(isVisibleProvider),
         child: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
+          items: [
+            const BottomNavigationBarItem(
               icon: Icon(Iconsax.home_2),
               label: '',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Iconsax.search_normal),
               label: '',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Iconsax.notification),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Iconsax.profile_circle),
+              icon: (avatar == null)
+                  ? const CircleAvatar(
+                      radius: 15,
+                      backgroundImage: AssetImage('assets/images/profile.png'),
+                    )
+                  : CircleAvatar(
+                      radius: 15,
+                      backgroundImage: NetworkImage(avatar),
+                    ),
               label: '',
             ),
           ],
