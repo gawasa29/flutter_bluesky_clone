@@ -9,6 +9,7 @@ import 'package:flutter_bluesky_clone/features/user/view/widgets/background_pic.
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconsax/iconsax.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -155,7 +156,7 @@ class ProfileScreen extends ConsumerWidget {
         shape: const CircleBorder(),
         backgroundColor: colors.primary,
         child: Icon(
-          Icons.edit_square,
+          Iconsax.message_edit,
           color: colors.onPrimary,
         ),
       ),

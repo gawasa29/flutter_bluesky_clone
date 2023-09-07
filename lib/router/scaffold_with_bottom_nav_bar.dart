@@ -5,6 +5,7 @@ import 'package:flutter_bluesky_clone/features/search/view/search_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/profile_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconsax/iconsax.dart';
 
 final isVisibleProvider = StateProvider<bool>((ref) => true);
 
@@ -30,27 +31,19 @@ class _ScaffoldWithBottomNavBarState
         child: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
+              icon: Icon(Iconsax.home_2),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search,
-              ),
+              icon: Icon(Iconsax.search_normal),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.notifications,
-              ),
+              icon: Icon(Iconsax.notification),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.account_circle,
-              ),
+              icon: Icon(Iconsax.profile_circle),
               label: '',
             ),
           ],
@@ -71,7 +64,7 @@ class _ScaffoldWithBottomNavBarState
           },
           currentIndex: _navIndex,
           type: BottomNavigationBarType.fixed,
-          iconSize: 33,
+          iconSize: 30,
           showUnselectedLabels: false,
           showSelectedLabels: false,
         ),

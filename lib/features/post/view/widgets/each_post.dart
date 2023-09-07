@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/util/date_time.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_info.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
+import 'package:iconsax/iconsax.dart';
 
 class EachPost extends StatelessWidget {
   const EachPost({
@@ -108,7 +109,7 @@ class ActionIcons extends StatelessWidget {
           },
           child: Row(
             children: [
-              const Icon(Icons.chat_bubble_outline),
+              const Icon(Iconsax.message),
               Text(replyCount.toString()),
             ],
           ),
@@ -119,7 +120,7 @@ class ActionIcons extends StatelessWidget {
           },
           child: Row(
             children: [
-              const Icon(Icons.repeat),
+              const Icon(Iconsax.repeat),
               Text(repostCount.toString()),
             ],
           ),
@@ -130,7 +131,7 @@ class ActionIcons extends StatelessWidget {
           },
           child: Row(
             children: [
-              const Icon(Icons.favorite_border),
+              const Icon(Iconsax.heart),
               Text(likeCount.toString()),
             ],
           ),

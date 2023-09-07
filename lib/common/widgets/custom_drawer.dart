@@ -9,6 +9,7 @@ import 'package:flutter_bluesky_clone/features/user/view/settings_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconsax/iconsax.dart';
 
 class CustomDrawer extends ConsumerWidget {
   const CustomDrawer({super.key});
@@ -112,21 +113,21 @@ class CustomDrawer extends ConsumerWidget {
                       onTap: () {
                         context.go(SearchScreen.routePath);
                       },
-                      leading: const Icon(Icons.search),
+                      leading: const Icon(Iconsax.search_normal),
                       title: const Text('Search'),
                     ),
                     ListTile(
                       onTap: () {
                         context.go(HomeScreen.routePath);
                       },
-                      leading: const Icon(Icons.home),
+                      leading: const Icon(Iconsax.home_2),
                       title: const Text('Home'),
                     ),
                     ListTile(
                       onTap: () {
                         context.go(NotificationScreen.routePath);
                       },
-                      leading: const Icon(Icons.notifications),
+                      leading: const Icon(Iconsax.notification),
                       title: const Text('Notifications'),
                     ),
                     ListTile(
@@ -140,14 +141,14 @@ class CustomDrawer extends ConsumerWidget {
                       onTap: () {
                         context.go(ProfileScreen.routePath);
                       },
-                      leading: const Icon(Icons.account_circle),
+                      leading: const Icon(Iconsax.profile_circle),
                       title: const Text('Profile'),
                     ),
                     ListTile(
                       onTap: () {
                         context.push(SettingsScreen.routePath);
                       },
-                      leading: const Icon(Icons.settings),
+                      leading: const Icon(Iconsax.setting_2),
                       title: const Text('Settings'),
                     ),
                   ],

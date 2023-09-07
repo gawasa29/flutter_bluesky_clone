@@ -7,6 +7,7 @@ import 'package:flutter_bluesky_clone/features/post/view/widgets/each_post.dart'
 import 'package:flutter_bluesky_clone/router/scaffold_with_bottom_nav_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconsax/iconsax.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -50,7 +51,7 @@ class HomeScreen extends ConsumerWidget {
                 actions: [
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.settings),
+                    icon: const Icon(Iconsax.setting_2),
                   ),
                 ],
                 bottom: const PreferredSize(
@@ -104,7 +105,7 @@ class HomeScreen extends ConsumerWidget {
         shape: const CircleBorder(),
         backgroundColor: colors.primary,
         child: Icon(
-          Icons.edit_square,
+          Iconsax.message_edit,
           color: colors.onPrimary,
         ),
       ),

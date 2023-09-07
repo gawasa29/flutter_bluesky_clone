@@ -4,6 +4,7 @@ import 'package:flutter_bluesky_clone/common/util/date_time.dart';
 import 'package:flutter_bluesky_clone/features/post/repository/post_repository.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iconsax/iconsax.dart';
 
 class EachNotification extends ConsumerWidget {
   const EachNotification({
@@ -11,12 +12,10 @@ class EachNotification extends ConsumerWidget {
     required this.reason,
     required this.indexedAt,
     required this.reasonSubject,
-    required this.record,
     super.key,
   });
 
   final AtUri? reasonSubject;
-  final Map<String, dynamic>? record;
 
   final Actor author;
 
@@ -40,12 +39,12 @@ class EachNotification extends ConsumerWidget {
           const SizedBox(width: 20),
           if (reason.isLike)
             const Icon(
-              Icons.favorite_border,
+              Iconsax.heart,
               color: Colors.pink,
             ),
           if (reason.isRepost)
             const Icon(
-              Icons.repeat,
+              Iconsax.repeat,
               color: Colors.green,
             ),
           const SizedBox(width: 10),

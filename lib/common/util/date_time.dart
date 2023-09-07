@@ -8,7 +8,6 @@ String humanReadableDateTimeString(
   int daysDiffLimit = 30,
   String placeHolder = '',
 ]) {
-  print(dateTime);
   if (dateTime == null) {
     return placeHolder;
   }

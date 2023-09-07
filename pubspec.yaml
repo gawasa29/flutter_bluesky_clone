@@ -26,6 +26,9 @@ dependencies:
   shared_preferences: any
   intl: any
 
+  ###  Icon  ###
+  iconsax: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
