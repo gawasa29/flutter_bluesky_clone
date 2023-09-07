@@ -130,47 +130,44 @@ class EachUser extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final typography = theme.textTheme;
-    return InkWell(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Column(
-        children: [
-          const SizedBox(height: 5),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(width: 10),
-              UserPic(
-                radius: 20,
-                avatar: avatar,
-              ),
-              const SizedBox(width: 20),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      displayName ?? handle,
-                      style: typography.titleMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+    return Column(
+      children: [
+        const SizedBox(height: 5),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(width: 10),
+            UserPic(
+              radius: 20,
+              avatar: avatar,
+            ),
+            const SizedBox(width: 20),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    displayName ?? handle,
+                    style: typography.titleMedium!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    Text(
-                      '@$handle',
-                      style: typography.bodyMedium!.copyWith(
-                        color: colors.onSecondary,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                  ),
+                  Text(
+                    '@$handle',
+                    style: typography.bodyMedium!.copyWith(
+                      color: colors.onSecondary,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          const SizedBox(height: 5),
-          const Divider(thickness: 0.5),
-        ],
-      ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 5),
+        const Divider(thickness: 0.5),
+      ],
     );
   }
 }
