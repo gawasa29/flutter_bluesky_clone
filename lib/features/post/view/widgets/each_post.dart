@@ -1,7 +1,6 @@
 import 'package:bluesky/bluesky.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/util/date_time.dart';
-import 'package:flutter_bluesky_clone/features/user/view/widgets/user_info.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -40,7 +39,6 @@ class EachPost extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
-        //TODO If a better idea sparks a better idea, please someone fix it.
         if (reason != null) RePostMark(reason: reason!),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,9 +55,21 @@ class EachPost extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      UserInfo(
-                        handle: handle,
-                        displayName: displayName,
+                      Flexible(
+                        child: RichText(
+                          overflow: TextOverflow.ellipsis,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: displayName ?? handle,
+                              ),
+                              TextSpan(
+                                text: '@$handle',
+                              ),
+                            ],
+                            style: typography.bodyMedium!.copyWith(),
+                          ),
+                        ),
                       ),
                       const Text('・'),
                       Text(humanReadableDateTimeString(createdAt)),
@@ -216,8 +226,9 @@ class RePostMark extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(width: 35),
-        const Icon(Icons.repeat),
+        const Icon(Iconsax.repeat),
         const SizedBox(width: 10),
+        //TODO If a better idea sparks a better idea, please someone fix it.
         Flexible(
           child: Text('Reposted by @${extractHandle(reason.data.toString())}'),
         ),
