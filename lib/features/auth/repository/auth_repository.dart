@@ -1,4 +1,9 @@
 import 'package:bluesky/bluesky.dart';
+import 'package:flutter_bluesky_clone/common/blue_sky_app.dart';
+import 'package:flutter_bluesky_clone/common/error/error.dart';
+import 'package:flutter_bluesky_clone/features/auth/view/welcome_screen.dart';
+import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
+import 'package:flutter_bluesky_clone/router/router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -50,5 +55,69 @@ class AuthRepository {
       identifier: id,
       password: password,
     );
+  }
+}
+
+@riverpod
+class AuthCommand extends _$AuthCommand {
+  @override
+  FutureOr<void> build() {}
+
+  Future<void> signIn({
+    required String service,
+    required String id,
+    required String password,
+  }) async {
+    try {
+      state = const AsyncLoading();
+
+      final authRepository = ref.watch(authRepositoryProvider);
+
+      await authRepository.createSessionRepo(
+        service: service,
+        id: id,
+        password: password,
+      );
+
+      await authRepository.setService(service);
+      await authRepository.setId(id);
+      await authRepository.setPassword(password);
+
+      // To update the session
+      await BlueSkyApp.initializeApp();
+
+      state = const AsyncData(null);
+
+      if (state.hasError == false) {
+        ref.read(routerProvider).go(HomeScreen.routePath);
+      }
+    } on UnauthorizedException catch (e, stackTrace) {
+      final errorMessage = parseError(e);
+
+      if (errorMessage == null) return;
+
+      state = AsyncError(errorMessage, stackTrace);
+    } on XRPCException catch (e, stackTrace) {
+      final errorMessage = parseError(e);
+
+      if (errorMessage == null) return;
+
+      state = AsyncError(errorMessage, stackTrace);
+    }
+  }
+
+  Future<void> signOut() async {
+    state = const AsyncLoading();
+    ref.read(authRepositoryProvider)
+      ..removeService()
+      ..removeId()
+      ..removePassword();
+
+    await BlueSkyApp.initializeApp();
+    state = const AsyncData(null);
+
+    if (state.hasError == false) {
+      ref.read(routerProvider).go(WelcomeScreen.routePath);
+    }
   }
 }

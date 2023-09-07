@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
-import 'package:flutter_bluesky_clone/features/auth/view/sign_in_form_screen.dart';
+import 'package:flutter_bluesky_clone/features/auth/repository/auth_repository.dart';
 import 'package:flutter_bluesky_clone/features/user/repository/user_repository.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -88,7 +88,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
                   trailing: TextButton(
                     onPressed: () {
-                      ref.read(authProvider.notifier).signOut();
+                      ref.read(authCommandProvider.notifier).signOut();
                     },
                     child: const Text('Sign out'),
                   ),
