@@ -2,7 +2,7 @@
 
 bluesky clone built with Flutter using the [bluesky package](https://pub.dev/packages/bluesky)
 
-https://github.com/gawasa29/flutter_bluesky_clone/assets/61944230/4d35208d-f9f7-4692-8808-68d66faef481
+![image](https://github.com/gawasa29/flutter_bluesky_clone/assets/61944230/4d35208d-f9f7-4692-8808-68d66faef481)
 
 ## The project if not finished
 
@@ -13,6 +13,10 @@ This project is not yet complete. We look forward to your contribution.
 The following link has a list of features:
 
 https://github.com/users/gawasa29/projects/3
+
+## Screenshots
+
+
 
 ## Getting started
 
