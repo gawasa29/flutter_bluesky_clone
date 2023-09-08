@@ -71,6 +71,8 @@ class ProfileScreen extends ConsumerWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 10),
                                   child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       ProfileUserInfo(
                                         handle: profile.handle,
