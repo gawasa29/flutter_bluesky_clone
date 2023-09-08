@@ -1,6 +1,6 @@
 # flutter_bluesky_clone
 
-bluesky clone built with Flutter using the [bluesky package](https://pub.dev/packages/bluesky)
+bluesky clone built with Flutter using the [bluesky package](https://pub.dev/packages/bluesky) running on AT protocol
 
 ![image](https://github.com/gawasa29/flutter_bluesky_clone/assets/61944230/4d35208d-f9f7-4692-8808-68d66faef481)
 
