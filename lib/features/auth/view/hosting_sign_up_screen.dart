@@ -3,6 +3,7 @@ import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/common/widgets/error_banner.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/sign_up_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_navigation_button.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 enum HostingOption { bluesky, other }
@@ -101,7 +102,10 @@ class _HostingSignUpScreenState extends State<HostingSignUpScreen> {
                                 TextFormField(
                                   controller: urlController,
                                   decoration: const InputDecoration(
-                                    prefixIcon: Icon(Icons.language),
+                                    prefixIcon: Icon(
+                                      FontAwesomeIcons.globe,
+                                      size: 18,
+                                    ),
                                   ),
                                 ),
                                 Row(

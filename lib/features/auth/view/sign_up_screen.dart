@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/handle_name_entry_screen.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_navigation_button.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -60,7 +61,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   TextFormField(
                     controller: inviteController,
                     decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.confirmation_number),
+                      prefixIcon: Icon(
+                        FontAwesomeIcons.ticket,
+                        size: 18,
+                      ),
                       hintText: 'Required for this provider',
                     ),
                     onChanged: (value) {
@@ -94,7 +98,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFormField(
                           controller: emailController,
                           decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.mail),
+                            prefixIcon: Icon(
+                              FontAwesomeIcons.envelope,
+                              size: 18,
+                            ),
                             hintText: 'Enter your email address',
                           ),
                         ),
@@ -103,7 +110,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFormField(
                           controller: passwordController,
                           decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.lock),
+                            prefixIcon: Icon(
+                              FontAwesomeIcons.lock,
+                              size: 18,
+                            ),
                             hintText: 'Choose your password',
                           ),
                         ),

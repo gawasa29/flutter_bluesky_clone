@@ -8,6 +8,7 @@ import 'package:flutter_bluesky_clone/features/user/view/profile_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/settings_screen.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -93,7 +94,11 @@ class CustomDrawer extends ConsumerWidget {
                       const SizedBox(height: 5),
                       Row(
                         children: [
-                          const Icon(Icons.confirmation_number),
+                          const Icon(
+                            FontAwesomeIcons.ticket,
+                            size: 18,
+                          ),
+                          const SizedBox(width: 5),
                           Text(
                             '0 invite codes',
                             style: typography.titleMedium!.copyWith(

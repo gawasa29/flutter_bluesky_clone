@@ -2,6 +2,7 @@ import 'package:bluesky/bluesky.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/util/date_time.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 
 class EachPost extends StatelessWidget {
@@ -90,7 +91,7 @@ class EachPost extends StatelessWidget {
             ),
           ],
         ),
-        const Divider(thickness: 0.5),
+        const Divider(height: 0, thickness: 0.5),
       ],
     );
   }
@@ -119,7 +120,11 @@ class ActionIcons extends StatelessWidget {
           },
           child: Row(
             children: [
-              const Icon(Iconsax.message),
+              const Icon(
+                FontAwesomeIcons.message,
+                size: 16,
+              ),
+              const SizedBox(width: 5),
               Text(replyCount.toString()),
             ],
           ),
@@ -130,7 +135,11 @@ class ActionIcons extends StatelessWidget {
           },
           child: Row(
             children: [
-              const Icon(Iconsax.repeat),
+              const Icon(
+                FontAwesomeIcons.retweet,
+                size: 16,
+              ),
+              const SizedBox(width: 5),
               Text(repostCount.toString()),
             ],
           ),
@@ -141,7 +150,11 @@ class ActionIcons extends StatelessWidget {
           },
           child: Row(
             children: [
-              const Icon(Iconsax.heart),
+              const Icon(
+                FontAwesomeIcons.heart,
+                size: 16,
+              ),
+              const SizedBox(width: 5),
               Text(likeCount.toString()),
             ],
           ),
@@ -201,7 +214,7 @@ class ActionIcons extends StatelessWidget {
                 value: 4,
                 child: Row(
                   children: [
-                    Icon(Icons.delete),
+                    Icon(FontAwesomeIcons.trashCan),
                     SizedBox(width: 5),
                     Text('Delete post'),
                   ],

@@ -4,6 +4,7 @@ import 'package:flutter_bluesky_clone/common/widgets/error_banner.dart';
 import 'package:flutter_bluesky_clone/features/auth/repository/auth_repository.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_navigation_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignInFormScreen extends ConsumerStatefulWidget {
   const SignInFormScreen({super.key});
@@ -58,7 +59,10 @@ class _SignInFormScreenState extends ConsumerState<SignInFormScreen> {
                       child: TextFormField(
                         readOnly: true,
                         decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.language),
+                          prefixIcon: Icon(
+                            FontAwesomeIcons.globe,
+                            size: 18,
+                          ),
                           hintText: 'BlueSky Social',
                         ),
                       ),
@@ -74,7 +78,10 @@ class _SignInFormScreenState extends ConsumerState<SignInFormScreen> {
                   TextFormField(
                     controller: usernameController,
                     decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.alternate_email),
+                      prefixIcon: Icon(
+                        FontAwesomeIcons.at,
+                        size: 18,
+                      ),
                       hintText: 'Username or email address',
                     ),
                   ),
@@ -82,7 +89,10 @@ class _SignInFormScreenState extends ConsumerState<SignInFormScreen> {
                     controller: passwordController,
                     obscureText: true,
                     decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: Icon(
+                        FontAwesomeIcons.lock,
+                        size: 18,
+                      ),
                       hintText: 'Password',
                     ),
                   ),

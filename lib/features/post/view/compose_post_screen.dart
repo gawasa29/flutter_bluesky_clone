@@ -5,6 +5,7 @@ import 'package:flutter_bluesky_clone/features/post/repository/post_repository.d
 import 'package:flutter_bluesky_clone/features/user/repository/user_repository.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 class ComposePostScreen extends ConsumerStatefulWidget {
@@ -117,11 +118,11 @@ class _ComposePostScreenState extends ConsumerState<ComposePostScreen> {
           const SizedBox(width: 10),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.image),
+            icon: const Icon(FontAwesomeIcons.image),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.photo_camera),
+            icon: const Icon(FontAwesomeIcons.camera),
           ),
           const Spacer(),
           Text(

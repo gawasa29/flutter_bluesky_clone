@@ -4,6 +4,7 @@ import 'package:flutter_bluesky_clone/features/auth/repository/auth_repository.d
 import 'package:flutter_bluesky_clone/features/user/repository/user_repository.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -102,7 +103,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       shape: BoxShape.circle,
                       color: colors.secondary,
                     ),
-                    child: const Icon(Icons.add),
+                    child: const Icon(
+                      FontAwesomeIcons.plus,
+                      size: 18,
+                    ),
                   ),
                   title: const Text('Add account'),
                 ),
@@ -124,7 +128,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       shape: BoxShape.circle,
                       color: colors.secondary,
                     ),
-                    child: const Icon(Icons.confirmation_number),
+                    child: const Icon(
+                      FontAwesomeIcons.ticket,
+                      size: 18,
+                    ),
                   ),
                   title: const Text('0 invite codes available'),
                 ),
@@ -184,7 +191,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       shape: BoxShape.circle,
                       color: colors.secondary,
                     ),
-                    child: const Icon(Icons.tune),
+                    child: const Icon(
+                      FontAwesomeIcons.sliders,
+                      size: 18,
+                    ),
                   ),
                   title: const Text('Home Feed Preferences'),
                 ),
@@ -197,7 +207,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       shape: BoxShape.circle,
                       color: colors.secondary,
                     ),
-                    child: const Icon(Icons.lock),
+                    child: const Icon(
+                      FontAwesomeIcons.lock,
+                      size: 18,
+                    ),
                   ),
                   title: const Text('App passwords'),
                 ),
@@ -210,7 +223,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       shape: BoxShape.circle,
                       color: colors.secondary,
                     ),
-                    child: const Icon(Icons.cell_tower),
+                    child: const Icon(
+                      FontAwesomeIcons.satelliteDish,
+                      size: 18,
+                    ),
                   ),
                   title: const Text('Saved Feeds'),
                 ),
@@ -223,7 +239,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       shape: BoxShape.circle,
                       color: colors.secondary,
                     ),
-                    child: const Icon(Icons.g_translate),
+                    child: const Icon(
+                      FontAwesomeIcons.language,
+                      size: 18,
+                    ),
                   ),
                   title: const Text('Content languages'),
                 ),
@@ -236,7 +255,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       shape: BoxShape.circle,
                       color: colors.secondary,
                     ),
-                    child: const Icon(Icons.alternate_email),
+                    child: const Icon(
+                      FontAwesomeIcons.at,
+                      size: 18,
+                    ),
                   ),
                   title: const Text('Change handle'),
                 ),
@@ -259,7 +281,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       color: colors.error,
                     ),
                     child: Icon(
-                      Icons.delete,
+                      FontAwesomeIcons.trashCan,
+                      size: 18,
                       color: colors.onError,
                     ),
                   ),

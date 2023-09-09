@@ -27,6 +27,7 @@ dependencies:
 
   ###  Icon  ###
   iconsax: any
+  font_awesome_flutter: any
 
   ###  Util  ###
   intl: any

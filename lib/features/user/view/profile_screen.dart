@@ -8,8 +8,8 @@ import 'package:flutter_bluesky_clone/features/user/view/edit_profile_screen.dar
 import 'package:flutter_bluesky_clone/features/user/view/widgets/background_pic.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:iconsax/iconsax.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -158,7 +158,7 @@ class ProfileScreen extends ConsumerWidget {
         shape: const CircleBorder(),
         backgroundColor: colors.primary,
         child: Icon(
-          Iconsax.message_edit,
+          FontAwesomeIcons.penToSquare,
           color: colors.onPrimary,
         ),
       ),

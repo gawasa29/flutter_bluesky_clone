@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/widgets/custom_scaffold.dart';
 import 'package:flutter_bluesky_clone/features/auth/view/widgets/custom_navigation_button.dart';
 import 'package:flutter_bluesky_clone/features/post/view/home_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 class HandleNameEntryScreen extends StatefulWidget {
@@ -53,7 +54,10 @@ class _HandleNameEntryScreenState extends State<HandleNameEntryScreen> {
                   TextFormField(
                     controller: handleNameController,
                     decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.alternate_email),
+                      prefixIcon: Icon(
+                        FontAwesomeIcons.at,
+                        size: 18,
+                      ),
                       hintText: 'e.g alice',
                     ),
                     onChanged: (value) => setState(() {}),
@@ -66,7 +70,7 @@ class _HandleNameEntryScreenState extends State<HandleNameEntryScreen> {
                     onPressed: () {
                       context.go(HomeScreen.routePath);
                     },
-                  )
+                  ),
                 ],
               ),
             ),
