@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluesky_clone/common/util/date_time.dart';
 import 'package:flutter_bluesky_clone/features/user/view/widgets/user_pic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iconsax/iconsax.dart';
 
 class EachPost extends StatelessWidget {
   const EachPost({
@@ -41,6 +40,7 @@ class EachPost extends StatelessWidget {
       children: [
         const SizedBox(height: 10),
         if (reason != null) RePostMark(reason: reason!),
+        const SizedBox(height: 5),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -239,8 +239,11 @@ class RePostMark extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(width: 35),
-        const Icon(Iconsax.repeat),
+        const SizedBox(width: 45),
+        const Icon(
+          FontAwesomeIcons.retweet,
+          size: 16,
+        ),
         const SizedBox(width: 10),
         //TODO If a better idea sparks a better idea, please someone fix it.
         Flexible(
