@@ -50,9 +50,13 @@ https://github.com/users/gawasa29/projects/3
 If you want to contribute to changes in this repo or add new features to existing functions, please check the [Contribution guide](https://github.com/gawasa29/flutter_bluesky_clone/blob/main/CONTRIBUTING.md)
 and [Projects](https://github.com/users/gawasa29/projects/3/views/1), and send a pull request. Contributions not listed in Projects are also okay. Any contribution is welcome.
 
-## Author
+## License (MIT)
 
-@gawasa29
+See [./LICENSE](./LICENSE) for the full license.
+
+## P.S.
+
+If this code has been of some help to you, please add ⭐️. It will make me happy.
 
 
 
