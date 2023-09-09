@@ -57,19 +57,20 @@ class EachPost extends StatelessWidget {
                   Row(
                     children: [
                       Flexible(
-                        child: RichText(
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
+                        child: Text.rich(
+                          TextSpan(
                             children: [
                               TextSpan(
                                 text: displayName ?? handle,
+                                style: typography.bodyMedium!.copyWith(),
                               ),
                               TextSpan(
                                 text: '@$handle',
+                                style: typography.bodyMedium!.copyWith(),
                               ),
                             ],
-                            style: typography.bodyMedium!.copyWith(),
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       const Text('・'),

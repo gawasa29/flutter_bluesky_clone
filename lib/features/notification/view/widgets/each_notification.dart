@@ -56,8 +56,8 @@ class EachNotification extends ConsumerWidget {
                   radius: 20,
                   avatar: author.avatar,
                 ),
-                RichText(
-                  text: TextSpan(
+                Text.rich(
+                  TextSpan(
                     children: [
                       TextSpan(
                         text: author.displayName ?? author.handle,
